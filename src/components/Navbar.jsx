@@ -1,0 +1,161 @@
+import { Menu, Search, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { assets, navItems } from "../assets/assets";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+const Navbar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const navRef = useRef(null);
+  const [navOpen, setNavOpen] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleNavToggle = () => {
+    setNavOpen(!navOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (navRef.current && !navRef.current.contains(event.target)) {
+      setNavOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    setNavOpen(false);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [location.pathname]);
+
+  const handleOutputSearch = (event) => {
+    event.preventDefault();
+    if (searchQuery.trim() !== "") {
+      navigate(`/search/${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  return (
+    <nav
+      ref={navRef}
+      className="w-full bg-transparent mx-auto max-w-7xl py-6 px-14 lg:px-20"
+    >
+      <div className="flex items-center justify-between">
+        {/* Image, Hamburger and 3 Nav Menu */}
+        <div className="flex items-center">
+          <div className="lg:hidden">
+            <button
+              onClick={handleNavToggle}
+              type="button"
+              aria-expanded={navOpen}
+              aria-label="Toggle Nav Menu"
+            >
+              {navOpen ? (
+                <X className="h-10 w-10 text-dark" />
+              ) : (
+                <Menu className="h-10 w-10 text-dark" />
+              )}
+            </button>
+          </div>
+
+          {/* pixel logo */}
+          <div className="mr-7 hidden lg:block select-none">
+            <img src={assets.pixel_logo} />
+          </div>
+
+          {/* Nav Menu */}
+          <div className="relative justify-items-center z-50">
+            <div
+              className={`${navOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-10"
+                }
+                                        flex flex-col absolute items-center bg-white w-[160px] -left-10 mt-10 shadow-2xl rounded-xl
+                                        transition-all duration-700 ease-in-out
+                                        lg:static lg:opacity-100 translate-y-0 lg:flex-row lg:space-x-10 lg:shadow-none lg:py-0 lg:mt-0
+                                        `}
+            >
+              {navItems.map((item, index) => (
+                <Link
+                  key={index}
+                  to={item.href}
+                  className={`${location.pathname === item.href
+                    ? "font-extrabold"
+                    : "font-medium "
+                    }
+                                    ${item.bg
+                      ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden"
+                      : ""
+                    }
+                                text-hijau hover:font-extrabold hover:text-hijau transition-all duration-500
+                                text-base py-2 lg:py-0
+                                `}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Search, Shared and profile image */}
+        <div className="flex items-center gap-x-7 ">
+          <div className="flex items-center gap-x-3">
+            {/* Input search */}
+            <form onSubmit={handleOutputSearch}>
+              <div className="md:flex gap-x-5 items-center md:border md:border-hijau rounded-2xl py-4">
+                <div className={`${isFocus ? "" : ""} ml-5 flex items-center`}>
+                  <Search
+                    className={`w-7 h-7 md:w-5 md:h-5 transform transition-all duration-1000
+                                        ${isFocus
+                        ? "lg:absolute lg:transform lg:translate-x-56"
+                        : "lg:static"
+                      }`}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                  />
+                </div>
+                <div className={`${isFocus ? "mr-5" : ""} hidden md:block`}>
+                  <input
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    placeholder={`${isFocus ? "" : "Search Something ...."}`}
+                    className={`
+                                        ${isFocus
+                        ? "transform -translate-x-5"
+                        : ""
+                      } 
+                                        transform transition-all duration-1000 bg-transparent
+                                        text-dark placeholder:text-dark font-normal text-base outline-none border-none
+                                        `}
+                  />
+                </div>
+              </div>
+            </form>
+            {/* Shared Button */}
+            <div className="hidden md:block select-none">
+              <button
+                onClick={() => navigate("/project/share")}
+                type="button"
+                aria-label="Share Project"
+                className="border border-hijau text-dark rounded-2xl py-4 px-5
+                            hover:bg-hijau transition-all duration-300 hover:text-white"
+              >
+                Share Project
+              </button>
+            </div>
+          </div>
+          {/* Profile image */}
+          <div className="">
+            <img src={assets.photo_profile} className="w-14 h-14 select-none" />
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
