@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom"
 import SingleButton from "../../components/buttons/SingleButton"
 import FormField from "../../components/FormField"
 import FormFieldUpload from "../../components/FormFieldUpload"
 import GroupImage from "../../components/GroupImage"
 
 const FormProjectPage = () => {
+    const navigate = useNavigate()
+
     return (
         <div className='flex flex-col mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full'>
             <div className='mt-10 flex justify-center relative'>
@@ -21,6 +24,7 @@ const FormProjectPage = () => {
                     border='hijau'
                     hovText='white'
                     hovBg='hijau'
+                    onclick={() => navigate('/project/detail')}
                 />
                 <SingleButton
                     text='Upload'
@@ -29,6 +33,7 @@ const FormProjectPage = () => {
                     hovText='hijau'
                     hovBg='white'
                     hovBorder='hijau'
+                    onclick={() => navigate('/project')}
                 />
             </div>
         </div>

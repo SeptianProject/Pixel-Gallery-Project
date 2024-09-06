@@ -10,6 +10,7 @@ export const BounceInTop = ({ children, delayVal }) => {
         <motion.div
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true }}
             transition={{
                 type: 'spring',
                 stiffness: 100,

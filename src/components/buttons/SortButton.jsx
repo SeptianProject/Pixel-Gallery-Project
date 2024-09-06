@@ -13,7 +13,7 @@ const SortButton = () => {
         <div
             onClick={handleSortClick}
             className={`w-32 md:w-[200px] transition-all duration-300 md:max-w-40 select-none cursor-pointer absolute md:right-0 z-50
-                ${sortCLick ? 'bg-white' : 'bg-transparent'}`}>
+                ${sortCLick ? 'bg-white rounded-xl' : 'bg-transparent'}`}>
             <div className="flex justify-around items-center border border-hijau rounded-2xl py-[10px] mt-5 md:m-auto md:py-5" >
                 <button className="font-medium text-hijau text-lg" type="button">Sort</button>
                 {sortCLick ? <ChevronDown

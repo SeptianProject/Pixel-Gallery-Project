@@ -9,7 +9,7 @@ const FormFieldUpload = () => {
             </label>
             <div className="flex flex-col gap-1 py-16 items-center border border-hijau rounded-3xl">
                 <CloudDownload className="text-dark opacity-50" strokeWidth={1} size={70} />
-                <input type="text" placeholder="Upload your image from your device" />
+                <input type="text" placeholder="Upload your image from your device" className="w-full text-center mx-auto" />
             </div>
         </div>
     )

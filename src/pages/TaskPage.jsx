@@ -10,14 +10,14 @@ const TaskPage = () => {
                 <MainText
                     titleText='Take on the Task and Build Your Skills Portfolio!'
                     subText='Pixel Asssignment Arena'
-                    maxWMob='350px'
-                    maxWTab='7xl'
-                    maxWDesk='2xl'
+                    maxWMob='max-w-[350px]'
+                    maxWTab='max-w-7xl'
+                    maxWDesk='max-w-2xl'
                 />
             </div>
             <div className="max-w-7xl mt-16 md:mx-0 lg:px-24">
                 <RoundButton arrButton={taskButtons}
-                    maxMob='170px' />
+                    maxMob='max-w-[170px]' />
             </div>
             <div className="px-4 mt-28 grid md:grid-cols-2 md:gap-4 lg:grid-cols-3 lg:gap-4">
                 {/* <ListCards /> */}

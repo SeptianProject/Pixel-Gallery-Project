@@ -15,9 +15,9 @@ const HomePage = () => {
                         <MainText
                             titleText='Showcasing your finest creative project.'
                             subText='Pixel Gallery Project'
-                            maxWMob={'200px'}
-                            maxWTab='md'
-                            maxWDesk='xl'
+                            maxWMob='max-w-[200px]'
+                            maxWTab='max-w-md'
+                            maxWDesk='max-w-xl'
                         />
                         <SecondaryText
                             text='120 Websites'

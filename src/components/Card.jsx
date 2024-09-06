@@ -10,9 +10,9 @@ const Card = () => {
                         src={assets.card_image}
                         className='aspect-video'
                     />
-                    <div className='absolute rounded-b-2xl bottom-0 right-0 from-dark bg-gradient-to-t w-full h-1/2 to-transparent  transition-all duration-300 opacity-0 group-hover:opacity-100'>
+                    <div className='absolute rounded-b-2xl bottom-0 right-0 from-dark bg-gradient-to-t w-full h-1/2 to-transparent transition-all duration-300 opacity-0 group-hover:opacity-100'>
                     </div>
-                    <div className='flex absolute bottom-0 h-10'>
+                    <div className='opacity-0 group-hover:opacity-100 flex absolute bottom-0 h-10'>
                         <h1 className='pl-6 text-white'>Pixel Gallery Project</h1>
                     </div>
                 </div>

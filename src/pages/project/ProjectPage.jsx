@@ -26,7 +26,7 @@ const ProjectPage = () => {
             <div className="max-w-7xl mt-16">
                 <RoundButton
                     arrButton={projectButtons}
-                    maxMob='152px' />
+                    maxMob='max-w-[152px]' />
             </div>
             <div className="mt-28">
                 <ListCards />

@@ -9,7 +9,7 @@ const ResultSearchPage = () => {
     return (
         <div className='flex flex-col mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full'>
             <BounceInLeft delayVal={0.8}>
-                <div className="mt-12 mx-auto flex flex-col text-center items-center md:px-20 lg:px-80">
+                <div className="mt-12 mb-10 mx-auto flex flex-col text-center items-center md:px-20 lg:px-80">
                     <MainText
                         // titleText={`Looking for result : ${decodeURIComponent(query)}`}
                         titleText='Looking for result : Web Design'
