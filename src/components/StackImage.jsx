@@ -7,8 +7,7 @@ const StackImage = () => {
                 <div className=''>
                     <img
                         src={assets.image_stack}
-                        className='md:h-[350px] md:w-screen md:bg-cover 
-                        rounded-3xl brightness-50 z-0' />
+                        className='md:h-[350px] md:w-screen md:bg-cover md:bg-center md:bg-no-repeat rounded-3xl brightness-50 z-0' />
                 </div>
                 <div className='absolute -bottom-12'>
                     <img

@@ -17,16 +17,13 @@ const SharedProject = () => {
             </div>
             <div className="mt-10 flex flex-col items-center gap-4 md:w-full md:max-w-xs md:mx-auto">
                 <SingleButton
-                    onclick={() => navigate("/")}
+                    onclick={() => navigate("/home")}
                     text="Done"
                     txtColor="white"
                     bgColor="hijau"
-                    border=""
-                    hovBg='white'
-                    hovText='hijau'
-                    hovBorder='hijau' />
+                />
                 <SingleButton
-                    onclick={() => navigate("/")}
+                    onclick={() => navigate("/home")}
                     text="Go Back"
                     txtColor="hijau"
                     bgColor="transparent"

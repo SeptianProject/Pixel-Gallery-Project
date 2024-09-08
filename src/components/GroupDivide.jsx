@@ -12,7 +12,7 @@ const GroupDivide = () => {
                 <div className='flex relative justify-center items-center'>
                     <img
                         src={assets.photo_profile}
-                        className='w-12 h-12 z-10 md:w-16 md:h-16'
+                        className='w-12 h-12 z-10 md:w-16 md:h-16 select-none'
                     />
                     <div className='container absolute bg-secondary bg-opacity-20 w-full h-[2px] max-w-7xl'>
                     </div>
@@ -25,18 +25,19 @@ const GroupDivide = () => {
                     <h1 className='text-dark font-semibold text-2xl'>More From Nasyfas</h1>
                     <div className='flex items-center gap-x-2'>
                         <button
-                            onClick={() => navigate(-1)}
+                            onClick={() => navigate(1)}
                             className='rounded-full border border-hijau hover:bg-hijau hover:text-white transition-all duration-300  p-3'>
                             <ChevronLeft className='' />
                         </button>
                         <button
-                            onClick={() => navigate(1)}
-                            className='rounded-full border border-hijau p-3  hover:bg-hijau hover:text-white transition-all duration-300'>
+                            onClick={() => navigate(+1)}
+                            className='rounded-full border border-hijau p-3
+                            hover:bg-hijau hover:text-white transition-all duration-300'>
                             <ChevronRight />
                         </button>
                     </div>
                 </div>
-                <div className='md:grid md:grid-cols-2 lg:grid-cols-3 mx-auto md:px-10 lg:px-16'>
+                <div className='md:grid md:grid-cols-2 lg:grid-cols-3 mx-auto md:px-10 lg:px-16 select-none'>
                     <CardStackWhite />
                     <CardStackWhite />
                     <CardStackWhite />

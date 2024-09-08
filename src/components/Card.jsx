@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { BounceInTop } from './animations/BounceAnimate'
 
 const Card = () => {
+    const navigate = useNavigate()
+
     return (
         <BounceInTop>
-            <div className='flex flex-col pt-12 select-none'>
+            <div
+                onClick={() => navigate('/project/detail')}
+                className='flex flex-col pt-12 select-none cursor-pointer'>
                 <div className='relative group rounded-2xl hover:shadow-bottom-dark hover:border-transparent hover:border-b transition-all duration-300'>
                     <img
                         src={assets.card_image}

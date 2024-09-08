@@ -12,7 +12,7 @@ const DashboardPage = () => {
       </div>
       <div className="lg:flex lg:justify-between lg:items-center lg:mt-10">
         <div className="">
-          <div className="mt-24 flex flex-col items-center gap-5">
+          <div className="mt-24 flex flex-col items-start gap-5">
             <ProfileText />
             <SingleButton
               text="Edit Profile"

@@ -6,7 +6,7 @@ const DescriptionText = () => {
     <div className='mt-10'>
       <div>
         <SingleDescText text='Description' />
-        <p className='py-5 md:text-lg md:tracking-wide md:font-medium'>
+        <p className='text-dark py-5 md:text-lg md:font-medium '>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae fringilla purus, a iaculis risus. Cras a
           tortor id leo lacinia blandit. Praesent at dolor sit amet turpis luctus fringilla. Duis ac pharetra sapien. Nam
           vehicula orci in nulla placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae fringilla
@@ -20,7 +20,7 @@ const DescriptionText = () => {
         </p>
         <SingleDescText text='Technology' />
         <SecondaryText
-          text='React Tailwind CSS ' textMd='lg' fontMd='bold'
+          text='React Tailwind CSS ' textMd='lg' fontMd='medium'
         />
       </div>
     </div >

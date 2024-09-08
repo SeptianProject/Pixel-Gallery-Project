@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 
 const SingleButton = ({ onclick, text, bgColor, txtColor, border, hovText, hovBg, hovBorder }) => {
-    const ref = useRef
+    const ref = useRef()
     const [maxMob, setMaxMob] = useState(ref)
 
     const handleMaxWidth = () => {
@@ -17,16 +17,7 @@ const SingleButton = ({ onclick, text, bgColor, txtColor, border, hovText, hovBg
             ref={handleMaxWidth}
             onClick={onclick} type='button'
             className={`
-            text-${txtColor} 
-            bg-${bgColor} 
-            w-full
-            lg:w-80
-            lg:py-3
-            hover:text-${hovText} 
-            border-${border}
-            hover:bg-${hovBg} 
-            hover:border-${hovBorder} 
-            transition-all duration-300
+            text-${txtColor} bg-${bgColor} w-full lg:w-80 lg:py-4 hover:text-${hovText} border-${border} hover:bg-${hovBg}  hover:border-${hovBorder}  transition-all duration-300
             py-4 rounded-2xl border`} >
             {text}
         </button>

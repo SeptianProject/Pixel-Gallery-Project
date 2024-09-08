@@ -7,22 +7,24 @@ const CardTask = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="flex flex-col mb-10">
-            <div className="relative md:max-w-[350px] lg:max-w-[400px]">
+        <div
+            onClick={() => navigate('/task/detail')}
+            className="flex flex-col mb-10 cursor-pointer">
+            <div className="relative h-auto max-w-[350px] md:max-w-[380px] lg:max-w-[400px]">
                 {/* image */}
                 <div className="">
-                    <img src={assets.home_image} className="" />
+                    <img src={assets.home_image} className="w-full" />
                 </div>
                 {/* bottom */}
                 <div className="absolute w-full bottom-0 h-1/2 flex items-center justify-between px-5 bg-white border-dark border-opacity-40 border rounded-b-3xl">
                     {/* Typography */}
                     <div className="flex flex-col gap-y-2">
-                        <h1 className="text-dark font-bold text-md max-w-[250px] ">
+                        <h1 className="text-dark font-bold text-sm md:text-md max-w-40 md:max-w-[250px] ">
                             Creating Login & Register pages from flutter
                         </h1>
                         <div className="flex items-center gap-x-2">
                             <AlarmClock size={17} />
-                            <span className="text-sm text-normal">21 September 2050</span>
+                            <span className="text-xs md:text-sm text-normal">21 September 2050</span>
                         </div>
                     </div>
                     {/* button group */}

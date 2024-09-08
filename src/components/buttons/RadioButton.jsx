@@ -9,13 +9,13 @@ const RadioButton = () => {
     }
 
     return (
-        <div className='grid grid-cols-3 gap-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10'>
             {
                 radioItems.map((item, index) => (
                     <div
                         key={index}
                         onClick={() => handleSelectRadio(item.id)}
-                        className={`flex group cursor-pointer hover:shadow-bottom-green hover:transition-all items-center gap-x-5 border  duration-700 ease-in-out border-hijau rounded-2xl w-[300px] py-4
+                        className={`flex group cursor-pointer hover:shadow-bottom-green hover:transition-all items-center gap-x-5 border duration-700 ease-in-out border-hijau rounded-2xl w-[300px] py-4
                                 ${selectRadio === item.id ? '' : ''}`}>
                         <input
                             type='radio'
@@ -31,7 +31,7 @@ const RadioButton = () => {
                                 ${selectRadio === item.id ? 'bg-white border-hijau' : 'border-hijau'}`}
                         >
                             {selectRadio === item.id && (
-                                <div className="w-3 h-3 bg-hijau rounded-full group-hover:bg-hijau group-hover:transition-all duration-700"></div>
+                                <div className="w-3 h-3 bg-hijau rounded-full group-hover:bg-hijau group-hover:transition-all duration-700 ease-in-out"></div>
                             )}
                         </label>
                         <button

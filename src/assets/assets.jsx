@@ -27,10 +27,10 @@ export const assets = {
 }
 
 export const navItems = [
-    { label: "Home", href: "/", select: false },
+    { label: "Home", href: "/home", select: false },
     { label: "Project", href: "/project", select: false },
     { label: "Task", href: "/task", select: false },
-    { label: "Share Project", href: "/share", select: false, bg: true },
+    { label: "Share Project", href: "/project/share", select: false, bg: true },
 ]
 
 export const footerLinkItems = [

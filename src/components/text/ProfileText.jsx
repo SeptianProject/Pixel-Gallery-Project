@@ -4,7 +4,7 @@ const ProfileText = () => {
         <div className="flex flex-col gap-y-3">
             <h1 className="text-dark font-bold text-3xl">Nasyfa Alsad</h1>
             <p className="text-dark font-normal text-xl">
-                UI/UX Designer
+                UI/UEX Designer
             </p>
             <p className="text-dark font-normal text-xl">
                 SMKN 1 Banyuwangi

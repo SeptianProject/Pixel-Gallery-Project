@@ -6,7 +6,7 @@ import SecondaryText from "../../components/text/SecondaryText"
 
 const ProjectPage = () => {
     return (
-        <div className='flex flex-col  mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full'>
+        <div className='flex flex-col mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full'>
             <div className="mt-16 lg:px-60">
                 <div className="flex flex-col items-center text-center">
                     <MainText
@@ -26,7 +26,8 @@ const ProjectPage = () => {
             <div className="max-w-7xl mt-16">
                 <RoundButton
                     arrButton={projectButtons}
-                    maxMob='max-w-[152px]' />
+                    maxMob='max-w-[150px]'
+                />
             </div>
             <div className="mt-28">
                 <ListCards />

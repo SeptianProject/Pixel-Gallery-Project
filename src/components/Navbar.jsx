@@ -107,7 +107,8 @@ const Navbar = () => {
               <div className="md:flex gap-x-5 items-center md:border md:border-hijau rounded-2xl py-4">
                 <div className={`${isFocus ? "" : ""} ml-5 flex items-center`}>
                   <Search
-                    className={`w-7 h-7 md:w-5 md:h-5 transform transition-all duration-1000
+                    onClick={() => navigate('/search')}
+                    className={`w-7 h-7 md:w-5 md:h-5 transform transition-all duration-1000 ease-in-out
                                         ${isFocus
                         ? "lg:absolute lg:transform lg:translate-x-56"
                         : "lg:static"
@@ -124,11 +125,11 @@ const Navbar = () => {
                     onBlur={() => setIsFocus(false)}
                     placeholder={`${isFocus ? "" : "Search Something ...."}`}
                     className={`
-                                        ${isFocus
+                      ${isFocus
                         ? "transform -translate-x-5"
                         : ""
                       } 
-                                        transform transition-all duration-1000 bg-transparent
+                                        transform transition-all duration-1000 ease-out bg-transparent
                                         text-dark placeholder:text-dark font-normal text-base outline-none border-none
                                         `}
                   />
@@ -149,7 +150,9 @@ const Navbar = () => {
             </div>
           </div>
           {/* Profile image */}
-          <div className="">
+          <div
+            onClick={() => navigate("/profile")}
+            className="cursor-pointer">
             <img src={assets.photo_profile} className="w-14 h-14 select-none" />
           </div>
         </div>

@@ -6,18 +6,19 @@ const ChooseRole = () => {
     const navigate = useNavigate()
 
     return (
-        <>
-            <div className="max-w-7xl w-full min-h-screen gap-y-40 absolute -top-10 flex items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center gap-y-12">
+        <div>
+            <div className="max-w-7xl w-full min-h-screen gap-y-40 
+            static lg:absolute -top-10 flex items-center justify-center overflow-hidden">
+                <div className="flex flex-col mt-40 lg:mt-0 items-center gap-y-12">
                     <div>
-                        <h1 className="font-bold text-dark text-5xl tracking-wide">Choose your role in Pixel</h1>
+                        <h1 className="font-bold text-dark text-center text-3xl md:text-5xl tracking-wide">Choose your role in Pixel</h1>
                     </div>
                     <div>
                         <RadioButton />
                     </div>
-                    <div className="">
+                    <div className="w-full px-10 md:px-40 lg:px-0 lg:w-auto">
                         <SingleButton
-                            onclick={() => navigate('/')}
+                            onclick={() => navigate('/home')}
                             txtColor='white'
                             bgColor='hijau'
                             text='Submit' />
@@ -29,7 +30,7 @@ const ChooseRole = () => {
                     <div className="bg-hijau w-[125px] h-14"></div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

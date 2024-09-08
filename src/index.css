@@ -6,8 +6,10 @@
 
 :root {
   font-family: "Inter", sans-serif;
+  transition-property: all;
+  transition-duration: 0.5s;
 }
 
 ::-webkit-scrollbar {
-  /* display: none; */
+  display: none;
 }
