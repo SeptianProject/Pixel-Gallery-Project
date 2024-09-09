@@ -1,13 +1,13 @@
-import ListCards from "../../components/ListCards"
 import MainText from "../../components/text/MainText"
 import { projectButtons } from "../../assets/assets"
 import RoundButton from "../../components/buttons/RoundButton"
 import SecondaryText from "../../components/text/SecondaryText"
+import ListCardProjects from "../../components/list-cards/ListCardProjects"
 
 const ProjectPage = () => {
     return (
         <div className='flex flex-col mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full'>
-            <div className="mt-16 lg:px-60">
+            <div className="mt-20 lg:px-60">
                 <div className="flex flex-col items-center text-center">
                     <MainText
                         titleText='Showcasing your finest creative project.'
@@ -23,15 +23,13 @@ const ProjectPage = () => {
                     />
                 </div>
             </div>
-            <div className="max-w-7xl mt-16">
+            <div className="max-w-7xl my-20">
                 <RoundButton
                     arrButton={projectButtons}
                     maxMob='max-w-[150px]'
                 />
             </div>
-            <div className="mt-28">
-                <ListCards />
-            </div>
+            <ListCardProjects />
         </div>
     )
 }

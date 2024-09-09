@@ -14,6 +14,8 @@ import image2 from './image-2.svg'
 import image3 from './image-3.svg'
 import image_register from './img-register.svg'
 import detail_image from './detail_img.svg'
+import firstGif from './first.gif'
+import secondGif from './second.gif'
 
 export const assets = {
     pixel_logo,
@@ -23,7 +25,8 @@ export const assets = {
     card_image,
     image_stack,
     github_icon,
-    image1, image2, image3, image_register, detail_image
+    image1, image2, image3, image_register, detail_image,
+    firstGif, secondGif
 }
 
 export const navItems = [

@@ -1,8 +1,8 @@
 import { BounceInLeft } from '../components/animations/BounceAnimate'
-import ListCards from '../components/ListCards'
 import { useParams } from 'react-router-dom'
 import MainText from '../components/text/MainText'
 import SecondaryText from '../components/text/SecondaryText'
+import ListCardProjects from '../components/list-cards/ListCardProjects'
 
 const ResultSearchPage = () => {
     const { query } = useParams()
@@ -24,7 +24,7 @@ const ResultSearchPage = () => {
                     />
                 </div>
             </BounceInLeft>
-            <ListCards />
+            <ListCardProjects />
         </div>
     )
 }

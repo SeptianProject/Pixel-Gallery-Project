@@ -14,7 +14,9 @@ const DashboardProjects = () => {
         </div>
       </div>
       <div className="relative">
-        <div className="mt-10 md:grid md:grid-cols-2 md:gap-x-5">
+        <div className=" w-full h-[30rem] overflow-y-auto md:grid md:grid-cols-2 md:gap-x-5">
+          <CardStackWhite />
+          <CardStackWhite />
           <CardStackWhite />
           <CardStackWhite />
           <CardStackWhite />

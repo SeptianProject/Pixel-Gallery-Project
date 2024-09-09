@@ -11,18 +11,19 @@ import ResultSearchPage from "./ResultSearchPage"
 import { BounceInBottom } from "../components/animations/BounceAnimate"
 import Navbar from "../components/Navbar"
 import RegisterPage from "./auth/RegisterPage"
-import ChooseRole from "./ChooseRole"
+import ChooseRole from "./auth/ChooseRole"
 import Footer from "../components/Footer"
-import GifAnimation from "./gif/GifAnimation"
 import Profile from "./Profile"
 import DetailTask from "./tasks/DetailTask"
+import GifComponent from "../components/gifComponent"
+import { assets } from "../assets/assets"
 
 const Page = () => {
     const location = useLocation()
 
-    const hideNavbar = location.pathname === '/project/share' || location.pathname === '/project/detail' || location.pathname === '/task/detail' || location.pathname === '/' || location.pathname === '/choose-role' || location.pathname === '/animate'
+    const hideNavbar = location.pathname === '/project/share' || location.pathname === '/-' || location.pathname === '/project/detail' || location.pathname === '/task/detail' || location.pathname === '/' || location.pathname === '/choose-role' || location.pathname === '/animate'
 
-    const hideFooter = location.pathname === '/' || location.pathname === '/choose-role' || location.pathname === '/animate'
+    const hideFooter = location.pathname === '/' || location.pathname === '/-' || location.pathname === '/choose-role' || location.pathname === '/animate'
 
     return (
         <>
@@ -36,13 +37,19 @@ const Page = () => {
                     <Route path='*' element={<NotFoundPage />} />
                     <Route path='/' element={<RegisterPage />} />
                     <Route path='/choose-role' element={<ChooseRole />} />
-                    <Route path='/animate' element={<GifAnimation />} />
+                    <Route path='/-'
+                        element={<GifComponent
+                            title='Hello Nasyfa, Welcome to Pixel'
+                            subtitle='Hang in there, your account is getting set up!'
+                            gif={assets.firstGif}
+                        />}
+                    />
                     <Route path='/home' element={<HomePage />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/project' element={<ProjectPage />} />
                     <Route path='/task' element={<TaskPage />} />
                     <Route path='/task/detail' element={<DetailTask />} />
-                    <Route path='/search' element={<ResultSearchPage />} />
+                    <Route path='/search/:query' element={<ResultSearchPage />} />
                     <Route path='/project/form' element={<FormProjectPage />} />
                     <Route path="/project/share" element={<SharedProject />} />
                     <Route path="/dashboard" element={<DashboardUser />} />

@@ -24,13 +24,11 @@ const RegisterPage = () => {
                         </div>
                         {/* form */}
                         <div className="flex flex-col gap-y-3">
-                            <div className="">
-                                <FormRegister />
-                            </div>
+                            <FormRegister />
                             {/* desc */}
-                            <div className="lg:max-w-[250px] w-full text-center flex justify-center lg:text-start">
+                            <div className="mx-auto md:m-0 max-w-[250px] transition-all duration-500 ease-in-out text-center md:text-start">
                                 <p
-                                    className="font-normal text-dark text-xs"
+                                    className="font-normal text-dark text-sm"
                                 >By clicking the <span className="font-semibold text-hijau cursor-pointer">Register</span> button, you agree to our terms and conditions.</p>
                             </div>
                         </div>

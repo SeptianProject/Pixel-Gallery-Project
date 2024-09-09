@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { assets } from '../assets/assets'
-import { BounceInTop } from './animations/BounceAnimate'
+import { assets } from '../../assets/assets'
+import { BounceInTop } from '../animations/BounceAnimate'
 
-const Card = () => {
+const CardProject = () => {
     const navigate = useNavigate()
 
     return (
@@ -31,4 +31,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default CardProject

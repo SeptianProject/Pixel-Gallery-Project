@@ -6,18 +6,20 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const navRef = useRef(null);
+  const closeRef = useRef(null);
   const [navOpen, setNavOpen] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchMobClick, setSearchMobClick] = useState(false);
 
   const handleNavToggle = () => {
     setNavOpen(!navOpen);
   };
 
   const handleClickOutside = (event) => {
-    if (navRef.current && !navRef.current.contains(event.target)) {
+    if (closeRef.current && !closeRef.current.contains(event.target)) {
       setNavOpen(false);
+      setSearchMobClick(false);
     }
   };
 
@@ -29,16 +31,20 @@ const Navbar = () => {
     };
   }, [location.pathname]);
 
-  const handleOutputSearch = (event) => {
-    event.preventDefault();
+  const handleOutputSearch = (e) => {
+    e.preventDefault();
     if (searchQuery.trim() !== "") {
       navigate(`/search/${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
+  const handleSearchMobClick = () => {
+    setSearchMobClick(!searchMobClick);
+  }
+
   return (
     <nav
-      ref={navRef}
+      ref={closeRef}
       className="w-full bg-transparent mx-auto max-w-7xl py-6 px-14 lg:px-20"
     >
       <div className="flex items-center justify-between">
@@ -68,8 +74,8 @@ const Navbar = () => {
           <div className="relative justify-items-center z-50">
             <div
               className={`${navOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-10"
+                ? "block"
+                : "hidden"
                 }
                                         flex flex-col absolute items-center bg-white w-[160px] -left-10 mt-10 shadow-2xl rounded-xl
                                         transition-all duration-700 ease-in-out
@@ -100,38 +106,40 @@ const Navbar = () => {
         </div>
 
         {/* Search, Shared and profile image */}
-        <div className="flex items-center gap-x-7 ">
+        <div className="flex items-center gap-x-7">
           <div className="flex items-center gap-x-3">
             {/* Input search */}
-            <form onSubmit={handleOutputSearch}>
-              <div className="md:flex gap-x-5 items-center md:border md:border-hijau rounded-2xl py-4">
-                <div className={`${isFocus ? "" : ""} ml-5 flex items-center`}>
+            <form onSubmit={handleOutputSearch} >
+              <div className={` 
+                ${searchMobClick ? 'flex border border-hijau' : ''}
+                md:flex gap-x-5 items-center md:border md:border-hijau rounded-2xl py-4`}>
+                <div className={`ml-5 flex items-center`}>
                   <Search
-                    onClick={() => navigate('/search')}
-                    className={`w-7 h-7 md:w-5 md:h-5 transform transition-all duration-1000 ease-in-out
-                                        ${isFocus
-                        ? "lg:absolute lg:transform lg:translate-x-56"
-                        : "lg:static"
-                      }`}
+                    className={`size-7 md:size-6 transform translate-x-0 transition-all duration-700 ease-in-out
+                      ${isFocus ? "absolute translate-x-56" : "lg:static"}
+                      ${searchMobClick ? 'translate-x-44' : ''}
+                      ${searchMobClick & isFocus ? 'translate-x-40' : ''}
+                      `}
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => setIsFocus(false)}
+                    onClick={() => handleSearchMobClick()}
                   />
                 </div>
-                <div className={`${isFocus ? "mr-5" : ""} hidden md:block`}>
+                <div className={`${isFocus ? "mr-5" : ""}
+                ${searchMobClick ? 'block w-44' : 'hidden'} 
+                md:block `}>
                   <input
                     value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => setIsFocus(false)}
                     placeholder={`${isFocus ? "" : "Search Something ...."}`}
                     className={`
-                      ${isFocus
-                        ? "transform -translate-x-5"
-                        : ""
-                      } 
-                                        transform transition-all duration-1000 ease-out bg-transparent
-                                        text-dark placeholder:text-dark font-normal text-base outline-none border-none
-                                        `}
+                      ${isFocus ? "transform -translate-x-5" : ""} 
+                      ${searchMobClick ? "transform -translate-x-12 w-40" : ""} 
+                      ${searchMobClick & isFocus ? "transform -translate-x-4 w-40" : ""} 
+                      transform transition-all duration-700 ease-out bg-transparent
+                    text-dark placeholder:text-dark font-normal text-base outline-none border-none`}
                   />
                 </div>
               </div>
@@ -151,8 +159,8 @@ const Navbar = () => {
           </div>
           {/* Profile image */}
           <div
-            onClick={() => navigate("/profile")}
-            className="cursor-pointer">
+            onClick={() => navigate("/dashboard")}
+            className={`${searchMobClick ? 'hidden' : 'block'} cursor-pointer`} >
             <img src={assets.photo_profile} className="w-14 h-14 select-none" />
           </div>
         </div>
