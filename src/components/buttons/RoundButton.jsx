@@ -18,7 +18,7 @@ const RoundButton = ({ arrButton, maxMob, }) => {
   return (
     <div
       ref={handleMaxWidth}
-      className="flex flex-wrap justify-between text-center items-center md:px-0">
+      className="flex flex-wrap justify-between text-center items-center" >
       {
         arrButton.map((item, index) => (
           <button
@@ -31,7 +31,7 @@ const RoundButton = ({ arrButton, maxMob, }) => {
           </button>
         ))
       }
-    </div>
+    </div >
   )
 }
 

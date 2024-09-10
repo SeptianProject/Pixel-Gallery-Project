@@ -4,7 +4,7 @@ import HomePage from "./HomePage"
 import ProjectPage from "./projects/ProjectPage"
 import TaskPage from "./tasks/TaskPage"
 import SharedProject from "./SharedPage"
-import DashboardUser from "./dashboard/DashboardPage"
+import DashboardPage from "./dashboard/DashboardPage"
 import DetailProject from "./projects/DetailProject"
 import FormProjectPage from "./form/FormProjectPage"
 import ResultSearchPage from "./ResultSearchPage"
@@ -13,31 +13,34 @@ import Navbar from "../components/Navbar"
 import RegisterPage from "./auth/RegisterPage"
 import ChooseRole from "./auth/ChooseRole"
 import Footer from "../components/Footer"
-import Profile from "./Profile"
 import DetailTask from "./tasks/DetailTask"
 import GifComponent from "../components/gifComponent"
 import { assets } from "../assets/assets"
+import ScrollToTop from "../components/constant/ScrollToTop"
+import FormTaskPage from "./form/FormTaskPage"
+import ProfilePage from "./dashboard/ProfilePage"
 
 const Page = () => {
     const location = useLocation()
 
-    const hideNavbar = location.pathname === '/project/share' || location.pathname === '/-' || location.pathname === '/project/detail' || location.pathname === '/task/detail' || location.pathname === '/' || location.pathname === '/choose-role' || location.pathname === '/animate'
+    const hideNavbar = location.pathname === '/project/share' || location.pathname === '/welcome' || location.pathname === '/upload-project' || location.pathname === '/upload-task' || location.pathname === '/project/detail' || location.pathname === '/task/detail' || location.pathname === '/' || location.pathname === '/choose-role' || location.pathname === '/animate'
 
-    const hideFooter = location.pathname === '/' || location.pathname === '/-' || location.pathname === '/choose-role' || location.pathname === '/animate'
+    const hideFooter = location.pathname === '/' || location.pathname === '/welcome' || location.pathname === '/upload-project' || location.pathname === '/upload-task' || location.pathname === '/choose-role' || location.pathname === '/animate'
 
     return (
         <>
             <div className="bg-white container mx-auto w-full max-w-7xl scroll-smooth selection:text-white selection:bg-teal-700">
                 {!hideNavbar &&
-                    <BounceInBottom delayVal={0.3}>
+                    <BounceInBottom>
                         <Navbar />
                     </BounceInBottom>
                 }
+                <ScrollToTop />
                 <Routes>
                     <Route path='*' element={<NotFoundPage />} />
                     <Route path='/' element={<RegisterPage />} />
                     <Route path='/choose-role' element={<ChooseRole />} />
-                    <Route path='/-'
+                    <Route path='/welcome'
                         element={<GifComponent
                             title='Hello Nasyfa, Welcome to Pixel'
                             subtitle='Hang in there, your account is getting set up!'
@@ -45,15 +48,34 @@ const Page = () => {
                         />}
                     />
                     <Route path='/home' element={<HomePage />} />
-                    <Route path='/profile' element={<Profile />} />
                     <Route path='/project' element={<ProjectPage />} />
                     <Route path='/task' element={<TaskPage />} />
                     <Route path='/task/detail' element={<DetailTask />} />
                     <Route path='/search/:query' element={<ResultSearchPage />} />
-                    <Route path='/project/form' element={<FormProjectPage />} />
+                    <Route path='/project/upload' element={<FormProjectPage />} />
+                    <Route path='/project/update' element={<FormProjectPage />} />
                     <Route path="/project/share" element={<SharedProject />} />
-                    <Route path="/dashboard" element={<DashboardUser />} />
                     <Route path="/project/detail" element={<DetailProject />} />
+                    <Route
+                        path="/upload-project"
+                        element={<GifComponent
+                            title='Your project is being uploaded'
+                            subtitle="It'll be ready shortly-just a moment more!"
+                            gif={assets.secondGif}
+                        />}
+                    />
+                    <Route path="/task/upload" element={FormTaskPage} />
+                    <Route
+                        path="/upload-task"
+                        element={<GifComponent
+                            title='Your Task is being uploaded'
+                            subtitle="The upload process will be ready - just a moment!"
+                            gif={assets.secondGif}
+                        />}
+                    />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/dashboard/pembimbing" element={<DashboardPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
                 </Routes>
                 {
                     !hideFooter &&

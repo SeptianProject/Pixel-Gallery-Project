@@ -1,9 +1,6 @@
 import { useRef, useState } from "react"
 
 const MainText = ({ titleText, subText, maxWMob, maxWTab, maxWDesk }) => {
-    // const [maxMob, setMaxMob] = useState({ maxWMob })
-    // const [maxTab, setMaxTab] = useState({ maxWTab })
-    // const [maxDesk, setMaxDesk] = useState({ maxWDesk })
     const ref = useRef()
     const [maxMob, setMaxMob] = useState(ref);
     const [maxTab, setMaxTab] = useState(ref);
@@ -18,12 +15,6 @@ const MainText = ({ titleText, subText, maxWMob, maxWTab, maxWDesk }) => {
             setMaxDesk(maxWDesk)
         }
     }
-
-    // useEffect(() => {
-    //     setMaxMob(maxWMob)
-    //     setMaxTab(maxWTab)
-    //     setMaxDesk(maxWDesk)
-    // }, [maxWMob, maxWTab, maxWDesk])
 
     return (
         <div ref={handleMaxWidth}>

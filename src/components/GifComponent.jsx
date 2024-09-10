@@ -9,7 +9,7 @@ const GifComponent = ({ title, subtitle, gif }) => {
     const [showGif, setShowGif] = useState(true)
 
     useEffect(() => {
-        const gifDuration = 4000
+        const gifDuration = 3000
 
         const timer = setTimeout(() => {
             setShowGif(false)
@@ -30,13 +30,13 @@ const GifComponent = ({ title, subtitle, gif }) => {
                 </div>
                 {/* text */}
                 <div className='text-center mt-6'>
-                    <BounceInTop delayVal={0.4}>
-                        <h1 className='text-dark font-extrabold text-2xl md:text-5xl tracking-wide'>
+                    <BounceInTop delayVal={0.5}>
+                        <h1 className='text-dark w-60 mx-auto font-extrabold text-2xl md:w-auto md:text-5xl tracking-wide'>
                             {showGif ? title : ''}
                         </h1>
                     </BounceInTop>
-                    <BounceInBottom delayVal={0.8}>
-                        <p className='text-dark mt-3 font-medium text-base md:text-xl tracking-wide'>
+                    <BounceInBottom delayVal={1}>
+                        <p className='text-dark w-60 mx-auto mt-3 font-medium text-base md:w-auto md:text-xl tracking-wide'>
                             {showGif ? subtitle : ''}
                         </p>
                     </BounceInBottom>

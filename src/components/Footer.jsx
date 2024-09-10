@@ -1,4 +1,4 @@
-import { footerLinkItems, footerIcons, assets, moreItems } from "../assets/assets"
+import { footerLinkItems, footerIcons, assets, footerMoreItems } from "../assets/assets"
 
 const Footer = () => {
 
@@ -25,7 +25,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="flex gap-4 mt-5 items-center mr-auto ml-5 md:mt-20 md:m-0">
-                    {moreItems.map((item, index) => (
+                    {footerMoreItems.map((item, index) => (
                         <p key={index} className="text-secondary text-sm font-medium">
                             {item}
                         </p>

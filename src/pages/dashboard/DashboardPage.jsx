@@ -1,10 +1,13 @@
-import StackImage from "../../components/StackImage";
+import StackImage from "../../components/images/StackImage";
 import ProfileText from "../../components/text/ProfileText";
 import SingleButton from "../../components/buttons/SingleButton";
 import SingleCard from "../../components/cards/SingleCard";
 import DashboardProjects from "../../components/DashboardProjects";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="flex flex-col mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full">
       <div className="mt-10">
@@ -18,6 +21,7 @@ const DashboardPage = () => {
               text="Edit Profile"
               txtColor="white"
               bgColor="hijau"
+              onclick={() => navigate('/profile/edit')}
             />
           </div>
           <div className="mt-16">

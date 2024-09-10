@@ -1,4 +1,4 @@
-import { assets } from '../assets/assets'
+import { assets } from '../../assets/assets'
 
 const StackImage = () => {
     return (
@@ -7,12 +7,12 @@ const StackImage = () => {
                 <div className=''>
                     <img
                         src={assets.image_stack}
-                        className='md:h-[350px] md:w-screen md:bg-cover md:bg-center md:bg-no-repeat rounded-3xl brightness-50 z-0' />
+                        className='sm:h-60 sm:w-screen md:h-[350px] md:w-screen sm:object-cover rounded-3xl brightness-50 z-0' />
                 </div>
                 <div className='absolute -bottom-12'>
                     <img
                         src={assets.photo_profile}
-                        className='h-[120px] w-[120px]' />
+                        className='size-36' />
                 </div>
             </div>
         </div>

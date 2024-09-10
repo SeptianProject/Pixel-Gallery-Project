@@ -17,6 +17,7 @@ import detail_image from './detail_img.svg'
 import firstGif from './first.gif'
 import secondGif from './second.gif'
 
+// Image and logo assets
 export const assets = {
     pixel_logo,
     photo_profile,
@@ -29,6 +30,7 @@ export const assets = {
     firstGif, secondGif
 }
 
+// Navbar items
 export const navItems = [
     { label: "Home", href: "/home", select: false },
     { label: "Project", href: "/project", select: false },
@@ -36,6 +38,7 @@ export const navItems = [
     { label: "Share Project", href: "/project/share", select: false, bg: true },
 ]
 
+// Footer items
 export const footerLinkItems = [
     { label: "Project", href: "/project" },
     { label: "About", href: "/about" },
@@ -51,10 +54,11 @@ export const footerIcons = [
     { icon: pinterest_icon, href: "https://pinterest.com" },
 ]
 
-export const moreItems = [
+export const footerMoreItems = [
     "© 2024 Pixel", "Terms", "Privacy", "Cookies",
 ]
 
+// Rounded Button project page items
 export const projectButtons = [
     { text: "All Project", href: "/projects", select: true },
     { text: "Websites", href: "/websites", select: false },
@@ -63,6 +67,7 @@ export const projectButtons = [
     { text: "More", href: "/more", select: false },
 ]
 
+// Rounded Button task page items
 export const taskButtons = [
     { text: "All Tasks", href: "/tasks", select: true },
     { text: "This Week", href: "/week", select: false },
@@ -70,7 +75,8 @@ export const taskButtons = [
     { text: "Completed", href: "/completed", select: false },
 ]
 
-export const formFieldItems = [
+// Form field project items
+export const formFieldProjects = [
     { id: "title", title: "Title", placeholder: "ex: Website E-Commerce" },
     { id: "category", title: "Category", placeholder: "Website", option: ["Website", "Design", "Application"] },
     { id: "github", title: "Link Github", placeholder: "https://github.com" },
@@ -79,7 +85,8 @@ export const formFieldItems = [
     { id: "website", title: "Link Website", placeholder: "https://website.com" },
 ]
 
-export const userDummy = [
+// Checkbox shared project items
+export const userDummies = [
     { id: 1, name: "Rehan Firmansyah", select: true },
     { id: 2, name: "Firman Rehansyah", select: false },
     { id: 3, name: "Rehansyah Firman", select: false },
@@ -87,6 +94,7 @@ export const userDummy = [
     { id: 5, name: "Opik Septian", select: true },
 ]
 
+// Form field register page items
 export const formFieldRegis = [
     { id: 'name', placeholder: "Enter your name" },
     { id: 'email', placeholder: "Enter your email" },
@@ -95,6 +103,7 @@ export const formFieldRegis = [
     { id: 'instance', placeholder: "Insances" },
 ]
 
+// Radio button choose role items
 export const radioItems = [
     { id: 1, label: "UI/UX Designer", select: false },
     { id: 2, label: "Front End Developer", select: true },
@@ -104,17 +113,37 @@ export const radioItems = [
     { id: 6, label: "Product Manager", select: false },
 ]
 
+// Card project info items
 export const cardProjectItems = [
     { id: 'upload', title: "Project Uploaded", value: 10 },
     { id: 'deleted', title: "Project Deleted", value: 0 },
     { id: 'completed', title: "Completed Project", value: 10 }
 ]
 
-
+// Button Sort project items
 export const sortItems = [
     { id: 'website', category: 'Website' },
     { id: 'design', category: 'Design' },
     { id: 'application', category: 'Application' },
     { id: 'more', category: 'More' }
 ]
+
+// Form field task items
+export const formFieldTasks = [
+    { id: 'title', title: 'Title', placeholder: 'ex : Membuat Website E-commerce' },
+    { id: 'tech', title: 'Technology', placeholder: 'ex : React JS' },
+    { id: 'desc', title: 'Description', placeholder: 'ex : Membuat website untuk penjualan baju' },
+    { id: 'deliver', title: 'Deliver To', placeholder: 'Please Select' },
+]
+
+// Form field edit profile items
+export const formEditProfileItems = [
+    { id: 'name', title: "Name", placeholder: "Rehan Firmansyah" },
+    { id: 'role', title: "Role", placeholder: "Ui/UEX Designer" },
+    { id: 'instance', title: "Instances", placeholder: "SMKN 1 Banyuwangi" },
+    { id: 'date', title: "Join Date", placeholder: "08 March 2022" },
+    { id: 'email', title: "Email", placeholder: "nasyfaalshadahmad@gmail.com" },
+    { id: 'pass', title: "Password", placeholder: "*******************" },
+]
+
 

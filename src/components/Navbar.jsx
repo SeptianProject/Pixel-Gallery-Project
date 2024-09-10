@@ -40,6 +40,9 @@ const Navbar = () => {
 
   const handleSearchMobClick = () => {
     setSearchMobClick(!searchMobClick);
+    if (window.innerWidth >= 784) {
+      setSearchMobClick(false)
+    }
   }
 
   return (
@@ -73,31 +76,17 @@ const Navbar = () => {
           {/* Nav Menu */}
           <div className="relative justify-items-center z-50">
             <div
-              className={`${navOpen
-                ? "block"
-                : "hidden"
-                }
-                                        flex flex-col absolute items-center bg-white w-[160px] -left-10 mt-10 shadow-2xl rounded-xl
-                                        transition-all duration-700 ease-in-out
-                                        lg:static lg:opacity-100 translate-y-0 lg:flex-row lg:space-x-10 lg:shadow-none lg:py-0 lg:mt-0
-                                        `}
-            >
+              className={`${navOpen ? "block" : "hidden"} 
+                flex flex-col absolute items-center bg-white w-[160px] -left-10 mt-10 shadow-2xl rounded-xl 
+                transition-all duration-700 ease-in-out lg:static lg:block translate-y-0 
+                lg:flex-row lg:space-x-10 lg:shadow-none lg:py-0 lg:mt-0 `}>
               {navItems.map((item, index) => (
                 <Link
                   key={index}
                   to={item.href}
-                  className={`${location.pathname === item.href
-                    ? "font-extrabold"
-                    : "font-medium "
-                    }
-                                    ${item.bg
-                      ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden"
-                      : ""
-                    }
-                                text-hijau hover:font-extrabold hover:text-hijau transition-all duration-500
-                                text-base py-2 lg:py-0
-                                `}
-                >
+                  className={`${location.pathname === item.href ? "font-extrabold" : "font-medium "}
+                    ${item.bg ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden" : ""}
+                    text-hijau hover:font-extrabold hover:text-hijau transition-all duration-500 text-base py-2 lg:py-0`}>
                   {item.label}
                 </Link>
               ))}
@@ -110,15 +99,14 @@ const Navbar = () => {
           <div className="flex items-center gap-x-3">
             {/* Input search */}
             <form onSubmit={handleOutputSearch} >
-              <div className={` 
-                ${searchMobClick ? 'flex border border-hijau' : ''}
+              <div className={`${searchMobClick ? 'flex border border-hijau' : ''}
                 md:flex gap-x-5 items-center md:border md:border-hijau rounded-2xl py-4`}>
-                <div className={`ml-5 flex items-center`}>
+                <div className={`${isFocus ? '' : ''} ml-5 flex items-center`}>
                   <Search
                     className={`size-7 md:size-6 transform translate-x-0 transition-all duration-700 ease-in-out
                       ${isFocus ? "absolute translate-x-56" : "lg:static"}
                       ${searchMobClick ? 'translate-x-44' : ''}
-                      ${searchMobClick & isFocus ? 'translate-x-40' : ''}
+                      ${searchMobClick && isFocus ? 'translate-x-[170px]' : ''}
                       `}
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => setIsFocus(false)}
@@ -147,7 +135,7 @@ const Navbar = () => {
             {/* Shared Button */}
             <div className="hidden md:block select-none">
               <button
-                onClick={() => navigate("/project/share")}
+                onClick={() => navigate("/project/upload")}
                 type="button"
                 aria-label="Share Project"
                 className="border border-hijau text-dark rounded-2xl py-4 px-5
@@ -164,8 +152,8 @@ const Navbar = () => {
             <img src={assets.photo_profile} className="w-14 h-14 select-none" />
           </div>
         </div>
-      </div>
-    </nav>
+      </div >
+    </nav >
   );
 };
 
