@@ -1,8 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import SingleButton from "../../components/buttons/SingleButton"
 import FormFieldUpload from "../../components/forms/FormFieldUpload"
-import FormProjectItems from "../../components/forms/FormProjectItems"
+import FormFIeldItems from "../../components/forms/FormFieldItems"
 import GroupImage from "../../components/images/GroupImage"
+import { formFieldProjects } from "../../assets/assets"
 
 const FormProjectPage = () => {
     const navigate = useNavigate()
@@ -12,8 +13,8 @@ const FormProjectPage = () => {
 
     return (
         <form >
-            <div className='flex flex-col mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-full'>
-                <div className='mt-10 flex justify-center relative'>
+            <div className='flex flex-col mx-auto px-14 lg:px-20 lg:max-w-7xl'>
+                <div className='mt-10'>
                     {
                         isUpload ?
                             <GroupImage
@@ -25,10 +26,11 @@ const FormProjectPage = () => {
                                 subtitle='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur hahahah adipiscing.'
                             />
                     }
-
                 </div>
                 <div className="mt-20">
-                    <FormProjectItems />
+                    <FormFIeldItems
+                        formFields={formFieldProjects}
+                    />
                     <FormFieldUpload />
                 </div>
                 <div className="flex flex-col md:flex-row lg:justify-between justify-center items-center mt-10 gap-5">

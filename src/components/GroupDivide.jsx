@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { assets } from '../assets/assets'
-import CardStackWhite from './cards/CardStackWhite'
 import { useNavigate } from 'react-router-dom'
+import CardDetailAction from './cards/CardDetailAction'
 
 const GroupDivide = () => {
     const navigate = useNavigate()
@@ -38,9 +38,9 @@ const GroupDivide = () => {
                     </div>
                 </div>
                 <div className='md:grid md:grid-cols-2 lg:grid-cols-3 mx-auto md:px-10 lg:px-16 select-none'>
-                    <CardStackWhite />
-                    <CardStackWhite />
-                    <CardStackWhite />
+                    <CardDetailAction />
+                    <CardDetailAction />
+                    <CardDetailAction />
                 </div>
             </div>
         </div>

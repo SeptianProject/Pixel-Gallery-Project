@@ -18,6 +18,7 @@ export const BounceInTop = ({ children, delayVal }) => {
                 delay: delayVal
             }}
             variants={bounceEffect}
+            className="mx-auto"
         >
             {children}
         </motion.div>

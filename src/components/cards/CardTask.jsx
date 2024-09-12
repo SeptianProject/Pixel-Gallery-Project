@@ -2,17 +2,28 @@ import { AlarmClock } from "lucide-react"
 import { assets } from "../../assets/assets"
 import { useNavigate } from "react-router-dom"
 import { BounceInTop } from "../animations/BounceAnimate"
+import { useRef, useState } from "react"
 
 
-const CardTask = () => {
+const CardTask = ({ maxWDesk }) => {
+    const ref = useRef()
     const navigate = useNavigate()
+    const [maxDesk, setMaxDesk] = useState(ref)
+
+    const handleMaxWidth = () => {
+        if (window.innerWidth >= 1280) {
+            setMaxDesk(maxWDesk)
+        }
+    }
+
 
     return (
         <BounceInTop delayVal={0.5}>
             <div
+                ref={handleMaxWidth}
                 onClick={() => navigate('/task/detail')}
                 className="flex flex-col mb-10 cursor-pointer">
-                <div className="relative h-auto max-w-[350px] md:max-w-[380px] lg:max-w-[400px]">
+                <div className={`relative h-auto max-w-[350px] md:max-w-[380px] lg:${maxDesk} `}>
                     {/* image */}
                     <div className="">
                         <img src={assets.home_image} className="w-full" />

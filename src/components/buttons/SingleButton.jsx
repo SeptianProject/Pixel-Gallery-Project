@@ -1,14 +1,20 @@
 import { useRef, useState } from "react"
 
-const SingleButton = ({ onclick, text, bgColor, txtColor, border, hovText, hovBg, hovBorder }) => {
+const SingleButton = ({
+    onclick, text, bgColor,
+    txtColor, border, hovText,
+    hovBg, hovBorder, maxWMob, maxWTab
+}) => {
     const ref = useRef()
+    const ref2 = useRef()
     const [maxMob, setMaxMob] = useState(ref)
+    const [maxTab, setMaxTab] = useState(ref2)
 
     const handleMaxWidth = () => {
         if (window.innerWidth <= 430) {
-            setMaxMob(maxMob)
-        } else {
-            return
+            setMaxMob(maxWMob)
+        } else if (window.innerWidth <= 784) {
+            setMaxTab(maxWTab)
         }
     }
 
@@ -17,8 +23,10 @@ const SingleButton = ({ onclick, text, bgColor, txtColor, border, hovText, hovBg
             ref={handleMaxWidth}
             onClick={onclick} type='button'
             className={`
-            text-${txtColor} bg-${bgColor} w-full lg:w-80 lg:py-4 hover:text-${hovText} border-${border} hover:bg-${hovBg}  hover:border-${hovBorder}  transition-all duration-300
-            py-4 rounded-2xl border`} >
+            text-${txtColor} bg-${bgColor} w-full lg:w-80 lg:py-4 hover:text-${hovText} border-${border} hover:bg-${hovBg} hover:border-${hovBorder} transition-all duration-300
+            py-4 rounded-2xl border 
+            ${maxMob} 
+            md:${maxTab}`} >
             {text}
         </button>
     )

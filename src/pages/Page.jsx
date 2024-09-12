@@ -19,13 +19,16 @@ import { assets } from "../assets/assets"
 import ScrollToTop from "../components/constant/ScrollToTop"
 import FormTaskPage from "./form/FormTaskPage"
 import ProfilePage from "./dashboard/ProfilePage"
+import DashboardAdminPage from "./dashboard/DashboardAdminPage"
+import LoginPage from "./auth/LoginPage"
 
 const Page = () => {
     const location = useLocation()
 
-    const hideNavbar = location.pathname === '/project/share' || location.pathname === '/welcome' || location.pathname === '/upload-project' || location.pathname === '/upload-task' || location.pathname === '/project/detail' || location.pathname === '/task/detail' || location.pathname === '/' || location.pathname === '/choose-role' || location.pathname === '/animate'
 
-    const hideFooter = location.pathname === '/' || location.pathname === '/welcome' || location.pathname === '/upload-project' || location.pathname === '/upload-task' || location.pathname === '/choose-role' || location.pathname === '/animate'
+    const hideNavbar = location.pathname === '/register' || location.pathname === '/login' || location.pathname === '/project/share' || location.pathname === '/welcome' || location.pathname === '/upload-project' || location.pathname === '/upload-task' || location.pathname === '/project/detail' || location.pathname === '/task/detail' || location.pathname === '/choose-role' || location.pathname === '/animate'
+
+    const hideFooter = location.pathname === '/register' || location.pathname === '/login' || location.pathname === '/welcome' || location.pathname === '/upload-project' || location.pathname === '/upload-task' || location.pathname === '/choose-role' || location.pathname === '/animate'
 
     return (
         <>
@@ -38,7 +41,9 @@ const Page = () => {
                 <ScrollToTop />
                 <Routes>
                     <Route path='*' element={<NotFoundPage />} />
-                    <Route path='/' element={<RegisterPage />} />
+                    <Route path="/" element={<HomePage />} />
+                    <Route path='/register' element={<RegisterPage />} />
+                    <Route path='/login' element={<LoginPage />} />
                     <Route path='/choose-role' element={<ChooseRole />} />
                     <Route path='/welcome'
                         element={<GifComponent
@@ -64,7 +69,7 @@ const Page = () => {
                             gif={assets.secondGif}
                         />}
                     />
-                    <Route path="/task/upload" element={FormTaskPage} />
+                    <Route path="/task/upload" element={<FormTaskPage />} />
                     <Route
                         path="/upload-task"
                         element={<GifComponent
@@ -74,8 +79,8 @@ const Page = () => {
                         />}
                     />
                     <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/dashboard/pembimbing" element={<DashboardPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/dashboard/admin" element={<DashboardAdminPage />} />
+                    <Route path="/profile/edit" element={<ProfilePage />} />
                 </Routes>
                 {
                     !hideFooter &&

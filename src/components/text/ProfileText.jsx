@@ -1,16 +1,19 @@
 
-const ProfileText = () => {
+const ProfileText = ({ name, role, instance, date, gapCustom }) => {
+
     return (
-        <div className="flex flex-col gap-y-3">
-            <h1 className="text-dark font-bold text-3xl">Nasyfa Alsad</h1>
+        <div className={`flex flex-col ${gapCustom}`}>
+            <h1 className="text-dark font-bold text-3xl">
+                {name}
+            </h1>
             <p className="text-dark font-normal text-xl">
-                UI/UEX Designer
+                {role}
             </p>
             <p className="text-dark font-normal text-xl">
-                SMKN 1 Banyuwangi
+                {instance}
             </p>
             <p className="text-dark font-normal text-xl">
-                Joined On March 2022
+                {date}
             </p>
         </div>
     )

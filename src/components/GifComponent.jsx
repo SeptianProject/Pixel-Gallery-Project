@@ -31,7 +31,7 @@ const GifComponent = ({ title, subtitle, gif }) => {
                 {/* text */}
                 <div className='text-center mt-6'>
                     <BounceInTop delayVal={0.5}>
-                        <h1 className='text-dark w-60 mx-auto font-extrabold text-2xl md:w-auto md:text-5xl tracking-wide'>
+                        <h1 className='text-dark w-60 mx-auto font-extrabold text-2xl md:w-auto md:text-5xl md:max-w-lg lg:max-w-full tracking-wide'>
                             {showGif ? title : ''}
                         </h1>
                     </BounceInTop>

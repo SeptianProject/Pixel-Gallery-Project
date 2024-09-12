@@ -21,8 +21,8 @@ const GroupGithub = () => {
 
     return (
         <div className={`
-        ${onScroll ? 'fixed top-0 mt-0 pb-10 pt-5 px-36 right-0 w-full z-50 bg-white shadow-lg' : ''}
-        flex items-center mt-4 select-none transform transition-all duration-500 ease-in-out`}>
+        ${onScroll ? 'fixed -top-2 mt-0 py-10 px-8 md:px-20 lg:px-32 right-0 w-full z-50 bg-white shadow-xl' : ''}
+        flex items-center select-none transform transition-all duration-500 ease-in-out`}>
             <div className='flex gap-x-3 mr-auto'>
                 <div>
                     <img src={assets.photo_profile} className='h-10 w-10 md:h-14 md:w-14' />

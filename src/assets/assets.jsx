@@ -35,7 +35,7 @@ export const navItems = [
     { label: "Home", href: "/home", select: false },
     { label: "Project", href: "/project", select: false },
     { label: "Task", href: "/task", select: false },
-    { label: "Share Project", href: "/project/share", select: false, bg: true },
+    { label: "Share Project", href: "/project/upload", select: false, bg: true },
 ]
 
 // Footer items
@@ -77,12 +77,15 @@ export const taskButtons = [
 
 // Form field project items
 export const formFieldProjects = [
-    { id: "title", title: "Title", placeholder: "ex: Website E-Commerce" },
-    { id: "category", title: "Category", placeholder: "Website", option: ["Website", "Design", "Application"] },
-    { id: "github", title: "Link Github", placeholder: "https://github.com" },
-    { id: "tech", title: "Technology", placeholder: "ex: Next JS" },
-    { id: "desc", title: "Description", placeholder: "ex: This is a website for selling clothes" },
-    { id: "website", title: "Link Website", placeholder: "https://website.com" },
+    { id: "title", title: "Title", placeholder: "ex: Website E-Commerce", type: 'text' },
+    { id: "tech", title: "Technology", placeholder: "ex: Next JS", type: 'text' },
+    {
+        id: "category", title: "Category", placeholder: "Website", type: 'select',
+        option: ["Website", "Design", "Application"]
+    },
+    { id: "desc", title: "Description", placeholder: "ex: This is a website for selling clothes", type: 'textArea' },
+    { id: "github", title: "Link Github", placeholder: "https://github.com", type: 'text' },
+    { id: "website", title: "Link Website", placeholder: "https://website.com", type: 'text' },
 ]
 
 // Checkbox shared project items
@@ -100,7 +103,12 @@ export const formFieldRegis = [
     { id: 'email', placeholder: "Enter your email" },
     { id: 'password', placeholder: "Enter your password" },
     { id: 'as', placeholder: "Entered as" },
-    { id: 'instance', placeholder: "Insances" },
+    { id: 'instance', placeholder: "Instances" },
+]
+
+export const formFieldLogin = [
+    { id: 'email', placeholder: "Enter your email" },
+    { id: 'password', placeholder: "Enter your password" },
 ]
 
 // Radio button choose role items
@@ -130,10 +138,13 @@ export const sortItems = [
 
 // Form field task items
 export const formFieldTasks = [
-    { id: 'title', title: 'Title', placeholder: 'ex : Membuat Website E-commerce' },
-    { id: 'tech', title: 'Technology', placeholder: 'ex : React JS' },
-    { id: 'desc', title: 'Description', placeholder: 'ex : Membuat website untuk penjualan baju' },
-    { id: 'deliver', title: 'Deliver To', placeholder: 'Please Select' },
+    { id: 'title', title: 'Title', placeholder: 'ex : Membuat Website E-commerce', type: 'text' },
+    { id: 'tech', title: 'Technology', placeholder: 'ex : React JS', type: 'text' },
+    { id: 'desc', title: 'Description', placeholder: 'ex : Membuat website untuk penjualan baju', type: 'textArea' },
+    {
+        id: 'deliver', title: 'Deliver To', placeholder: 'Please Select', type: 'select',
+        option: ["For All Interns", "Only Share With"]
+    },
 ]
 
 // Form field edit profile items
@@ -146,4 +157,15 @@ export const formEditProfileItems = [
     { id: 'pass', title: "Password", placeholder: "*******************" },
 ]
 
+export const projectInfoUser = [
+    { id: 'upload', title: 'Project Upload', value: 10 },
+    { id: 'delete', title: 'Project Deleted', value: 0 },
+    { id: 'complete', title: 'Project Completed', value: 10 }
+]
 
+export const projectInfoAdmin = [
+    { id: 'upload_project', title: 'Project Upload', value: 10 },
+    { id: 'delete_project', title: 'Project Deleted', value: 0 },
+    { id: 'upload_task', title: 'Task Upload', value: 10 },
+    { id: 'delete_task', title: 'Task Deleted', value: 10 },
+]
