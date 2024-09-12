@@ -10,7 +10,7 @@ const RegisterPage = () => {
         <div>
             <div className="relative min-h-screen max-w-full flex justify-center items-center overflow-hidden">
                 <AuthComponent
-                    RegPosition=''
+                    RegPosition='mt-20'
                     formData={formFieldRegis}
                     title='Create an Account.'
                     description={

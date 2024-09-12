@@ -33,7 +33,7 @@ const AuthComponent = ({
                     />
                 </div>
             </div>
-            <div ref={handleFormPosition} className={`static mt-14 md:mt-0 lg:absolute right-40 ${formPosition}`}>
+            <div ref={handleFormPosition} className={`static md:mt-0 lg:absolute right-40 ${formPosition}`}>
                 <div className="flex flex-col items-center gap-y-8">
                     {/* title */}
 
@@ -66,8 +66,8 @@ const AuthComponent = ({
                                 maxWTab={'px-20'}
                             />
                         </div>
-                        <div className='pt-1'>
-                            <p className="text-base text-darkBlue font-medium tracking-wide">
+                        <div className='pt-2'>
+                            <p className="text-sm md:text-base text-darkBlue font-medium tracking-wide">
                                 {textQuest} &nbsp;
                                 <span
                                     onClick={() => navigate(pathName)}
