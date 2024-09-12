@@ -14,13 +14,13 @@ import RegisterPage from "./auth/RegisterPage"
 import ChooseRole from "./auth/ChooseRole"
 import Footer from "../components/Footer"
 import DetailTask from "./tasks/DetailTask"
-import GifComponent from "../components/gifComponent"
 import { assets } from "../assets/assets"
 import ScrollToTop from "../components/constant/ScrollToTop"
 import FormTaskPage from "./form/FormTaskPage"
 import ProfilePage from "./dashboard/ProfilePage"
 import DashboardAdminPage from "./dashboard/DashboardAdminPage"
 import LoginPage from "./auth/LoginPage"
+import GifComponent from "../components/GifComponent"
 
 const Page = () => {
     const location = useLocation()
