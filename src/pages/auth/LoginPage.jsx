@@ -7,7 +7,7 @@ const LoginPage = () => {
         <div>
             <div className="relative min-h-screen max-w-full flex justify-center items-center overflow-hidden">
                 <AuthComponent
-                    LogPosition='-mt-10'
+                    LogPosition='-mt-20'
                     formData={formFieldLogin}
                     title='Welcome Back!'
                     textBtn='Login'
