@@ -152,8 +152,8 @@ export const formEditProfileItems = [
     { id: 'name', title: "Name", placeholder: "Rehan Firmansyah" },
     { id: 'role', title: "Role", placeholder: "Ui/UEX Designer" },
     { id: 'instance', title: "Instances", placeholder: "SMKN 1 Banyuwangi" },
-    { id: 'date', title: "Join Date", placeholder: "08 March 2022" },
-    { id: 'email', title: "Email", placeholder: "nasyfaalshadahmad@gmail.com" },
+    { id: 'date', title: "Join Date", placeholder: "08 March 2022", blocked: true },
+    { id: 'email', title: "Email", placeholder: "nasyfaalshadahmad@gmail.com", blocked: true },
     { id: 'pass', title: "Password", placeholder: "*******************" },
 ]
 

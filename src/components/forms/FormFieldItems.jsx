@@ -56,14 +56,22 @@ const FormFieldItems = ({ formFields }) => {
                                             className="border border-hijau focus:border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm overflow-y-auto resize-y break-words"
                                         />
                                     )
-                                    :
-                                    < input
-                                        id={item.id}
-                                        name={item.id}
-                                        type="text"
-                                        placeholder={item.placeholder}
-                                        className="border border-hijau rounded-2xl pl-7 pr-16  py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm"
-                                    />
+                                    : item.blocked === true
+                                        ?
+                                        < input
+                                            id={item.id}
+                                            name={item.id}
+                                            type="text"
+                                            disabled={true}
+                                            placeholder={item.placeholder}
+                                            className="border border-hijau rounded-2xl pl-7 pr-16  py-4 placeholder:text-dark bg-dark bg-opacity-30 placeholder:opacity-80 placeholder:text-sm font-medium" />
+                                        :
+                                        < input
+                                            id={item.id}
+                                            name={item.id}
+                                            type="text"
+                                            placeholder={item.placeholder}
+                                            className="border border-hijau rounded-2xl pl-7 pr-16 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm font-normal" />
                         }
                     </div>
                 ))

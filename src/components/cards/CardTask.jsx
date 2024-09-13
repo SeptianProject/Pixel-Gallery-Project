@@ -20,9 +20,10 @@ const CardTask = ({ maxWDesk }) => {
     return (
         <BounceInTop delayVal={0.5}>
             <div
+                ref={handleMaxWidth}
                 onClick={() => navigate('/task/detail')}
                 className="flex flex-col mb-10 cursor-pointer">
-                <div ref={handleMaxWidth} className={`relative h-auto max-w-[350px] md:max-w-[380px] lg:${maxDesk}`}>
+                <div className={`relative h-auto max-w-[350px] md:max-w-[380px] ${maxDesk}`}>
                     {/* image */}
                     <div className="">
                         <img src={assets.home_image} className="w-full" />
