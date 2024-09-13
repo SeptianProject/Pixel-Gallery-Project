@@ -1,8 +1,8 @@
-import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 import CardDetailAction from "./cards/CardDetailAction";
 import { BounceInLeft } from "./animations/BounceAnimate";
 import CardTask from "./cards/CardTask";
 import { useState } from "react";
+import ArrowButton from "./buttons/ArrowButton";
 
 const DashboardProjects = () => {
   const [arrowClick, setArrowClick] = useState(0);
@@ -26,17 +26,11 @@ const DashboardProjects = () => {
             {arrowClick === -1 ? 'Your Projects' : 'Your Tasks'}
           </h1>
         </BounceInLeft>
-        <div className="flex items-center gap-x-1">
-          <ChevronLeftCircle
-            onClick={() => handleArrowClick('left')}
-            className="text-dark hover:text-white rounded-full hover:bg-hijau cursor-pointer transition-all duration-300"
-            size={50}
-            strokeWidth={1} />
-          <ChevronRightCircle
-            onClick={() => handleArrowClick('right')}
-            className="text-dark hover:text-white rounded-full hover:bg-hijau cursor-pointer transition-all duration-300"
-            size={50}
-            strokeWidth={1} />
+        <div>
+          <ArrowButton
+            onClickLeft={() => handleArrowClick('left')}
+            onClickRight={() => handleArrowClick('right')}
+          />
         </div>
       </div>
       <div className="relative mt-10 select-none">
