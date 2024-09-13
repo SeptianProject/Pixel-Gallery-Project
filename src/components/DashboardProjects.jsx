@@ -38,17 +38,17 @@ const DashboardProjects = () => {
           w-full h-[30rem] overflow-y-scroll md:grid md:grid-cols-2 md:gap-x-5`}>
           {arrowClick === 0 ?
             <>
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
-              <CardTask maxWDesk={'max-w-[320px]'} />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
+              <CardTask maxWDesk='max-w-[320px]' />
             </>
             :
             <>
