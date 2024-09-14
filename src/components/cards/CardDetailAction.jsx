@@ -1,9 +1,12 @@
 
+import { useNavigate } from 'react-router-dom'
 import { assets } from '../../assets/assets'
 import { BounceInTop } from '../animations/BounceAnimate'
 import SmallButton from '../buttons/SmallButton'
 
 const CardDetailAction = () => {
+    const navigate = useNavigate()
+
     return (
         <BounceInTop delayVal={0.5}>
             <div className='relative max-w-[320px] h-auto group cursor-default flex justify-center flex-wrap mt-5'>
@@ -19,9 +22,13 @@ const CardDetailAction = () => {
                         <p className="text-sm font-medium text-white">Detail from project</p>
                     </div>
                     <div className="flex flex-col gap-y-1">
-                        <SmallButton text='Update' />
+                        <SmallButton
+                            onClick={() => navigate('/project/update')}
+                            text='Update' />
                         <SmallButton text='Delete' />
-                        <SmallButton text='Detail' />
+                        <SmallButton
+                            onClick={() => navigate('/project/detail')}
+                            text='Detail' />
                     </div>
                 </div>
             </div>
