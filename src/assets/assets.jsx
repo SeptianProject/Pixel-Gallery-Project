@@ -102,7 +102,10 @@ export const formFieldRegis = [
     { id: 'name', placeholder: "Enter your name" },
     { id: 'email', placeholder: "Enter your email" },
     { id: 'password', placeholder: "Enter your password" },
-    { id: 'as', placeholder: "Entered as" },
+    {
+        id: 'as', placeholder: "Entered as", type: 'select',
+        option: ['Interns', 'SuperVisor']
+    },
     { id: 'instance', placeholder: "Instances" },
 ]
 
