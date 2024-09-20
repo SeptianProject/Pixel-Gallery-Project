@@ -21,10 +21,18 @@ import ProfilePage from "./dashboard/ProfilePage";
 import DashboardAdminPage from "./dashboard/DashboardAdminPage";
 import LoginPage from "./auth/LoginPage";
 import GifComponent from "../components/GifComponent";
-import EmailConfirmed from "../lib/function/EmailConfirmed";
+import EmailConfirmed from "../lib/auth/EmailConfirmed";
+import { AuthContext } from "../lib/auth/AuthContext";
+import { useContext } from "react";
+import ProtectedRoute from "../lib/function/ProtectedRoute";
 
 const Page = () => {
+  const { token, loading } = useContext(AuthContext);
   const location = useLocation();
+
+  if (loading) {
+    return <>Loading....</>;
+  }
 
   const hideNavbar =
     location.pathname === "/register" ||
@@ -105,8 +113,16 @@ const Page = () => {
               />
             }
           />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/dashboard/admin" element={<DashboardAdminPage />} />
+          {token ? <Route path="/dashboard" element={<DashboardPage />} /> : ""}
+
+          <Route
+            path="/dashboard/admin"
+            element={
+              <ProtectedRoute token={token} allowedRoles={["SuperVisor"]}>
+                <DashboardAdminPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/profile/edit" element={<ProfilePage />} />
         </Routes>
         {!hideFooter && (

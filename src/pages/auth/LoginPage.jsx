@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { formFieldLogin } from "../../assets/assets";
 import AuthComponent from "../../components/AuthComponent";
 import GreenRectangle from "../../components/GreenRectangle";
 import { handleChange } from "../../lib/function/FormHandle";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/helper/createClient";
+import { AuthContext } from "../../lib/auth/AuthContext";
 
 const LoginPage = () => {
+  const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,7 +23,9 @@ const LoginPage = () => {
         password: formData.password,
       });
       if (error) throw error;
+      login(data);
       console.log(data);
+      navigate("/home");
     } catch (error) {
       alert(error);
     }

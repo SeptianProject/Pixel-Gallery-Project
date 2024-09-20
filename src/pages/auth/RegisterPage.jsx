@@ -20,7 +20,6 @@ const RegisterPage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  console.log(formData);
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -30,6 +29,7 @@ const RegisterPage = () => {
       options: {
         data: {
           displayName: formData.name,
+          role: formData.entered_as,
         },
       },
     });
@@ -40,6 +40,7 @@ const RegisterPage = () => {
       } else {
         setError(authError.message);
       }
+      console.error(error);
       return;
     }
 
@@ -59,6 +60,7 @@ const RegisterPage = () => {
       ]);
     if (profileError) {
       setError(profileError.message);
+      console.error(error);
     } else {
       alert("check your email for verification");
       setError(null);
