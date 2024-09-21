@@ -1,11 +1,13 @@
 import { Menu, Search, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { assets, navItems } from "../assets/assets";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../lib/auth/AuthContext";
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
   const closeRef = useRef();
   const [navOpen, setNavOpen] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -165,7 +167,9 @@ const Navbar = () => {
           </div>
           {/* Profile image */}
           <div
-            onClick={() => navigate("/dashboard")}
+            onClick={() => {
+              token ? navigate("/dashboard") : navigate("/login");
+            }}
             className={`${searchMobClick ? "hidden" : "block"} cursor-pointer`}
           >
             <img src={assets.photo_profile} className="w-14 h-14 select-none" />

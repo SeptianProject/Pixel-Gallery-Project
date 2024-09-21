@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { supabase } from "../helper/createClient";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -6,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");
@@ -18,16 +21,45 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (data) => {
-    setToken(data);
-    sessionStorage.setItem("token", JSON.stringify(data));
-    setRole(data.user.role); //Simpan role saat login
+  const login = async (email, password) => {
+    const { data: loginData, error: loginError } =
+      await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+    if (loginError) {
+      throw new Error("Login failed: " + loginError.message);
+    }
+
+    const userId = loginData.user.id;
+
+    const { data: profileData, error: profileError } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
+      .single();
+
+    if (profileError) {
+      throw new Error("Failed to retrieve profile: " + profileError.message);
+    }
+
+    setToken(loginData);
+    sessionStorage.setItem("token", JSON.stringify(loginData));
+    setRole(profileData.role);
+
+    if (profileData.role) {
+      navigate("/home");
+    } else {
+      navigate("/choose-role");
+    }
   };
 
   const logout = () => {
     setToken(null);
     setRole(null);
     sessionStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
