@@ -20,6 +20,7 @@ const RegisterPage = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+<<<<<<< HEAD
     console.log(formData);
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -65,6 +66,55 @@ const RegisterPage = () => {
             navigate("/login");
         }
     };
+=======
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          displayName: formData.name,
+          role: formData.entered_as,
+        },
+      },
+    });
+
+    if (authError) {
+      if (authError.status === 429) {
+        setError("To many requests. Please try again later.");
+      } else {
+        setError(authError.message);
+      }
+      console.error(error);
+      return;
+    }
+
+    // Setelah user terdaftar, masukkan data ke tabel profiles
+    const userId = authData.user.id;
+    const { data: profileData, error: profileError } = await supabase
+      .from("profiles")
+      .insert([
+        {
+          id: userId,
+          name: formData.name,
+          avatar_url: formData.avatar_url,
+          entered_as: formData.entered_as,
+          role: formData.role,
+          instances: formData.instances,
+        },
+      ]);
+    if (profileError) {
+      setError(profileError.message);
+      console.error(error);
+    } else {
+      alert("check your email for verification");
+      setError(null);
+      navigate("/login");
+    }
+  };
+>>>>>>> aa19969164e91e7e9a27a0e5787734b3a3f2ea61
 
     return (
         <div>
