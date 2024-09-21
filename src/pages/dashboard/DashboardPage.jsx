@@ -36,11 +36,11 @@ const DashboardPage = () => {
             </div>
             <div className="w-full md:w-72">
               <SingleButton
-                text="Edit Profile"
+                text="Logout"
                 txtColor="red-600"
                 bgColor="white"
                 border='hijau'
-                onclick={() => navigate('/profile/edit')}
+                onclick={() => navigate('/')}
               />
             </div>
           </div>
