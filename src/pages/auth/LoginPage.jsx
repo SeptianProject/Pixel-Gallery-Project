@@ -23,8 +23,6 @@ const LoginPage = () => {
     }
   }
 
-  console.log(formData);
-
   return (
     <div>
       <div className="relative min-h-screen max-w-full flex justify-center items-center overflow-hidden">

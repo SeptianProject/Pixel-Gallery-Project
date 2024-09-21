@@ -62,7 +62,7 @@ const ChooseRole = () => {
           <div className="w-full px-10 md:px-40 lg:px-0 lg:w-auto">
             <BounceInTop delayVal={3}>
               <SingleButton
-                onclick={() => updateRole}
+                onclick={() => updateRole()}
                 txtColor="white"
                 bgColor="hijau"
                 text="Submit"

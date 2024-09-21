@@ -5,9 +5,9 @@ import { BounceInLeft } from "../animations/BounceAnimate";
 const RadioButton = ({ onSelectRadio }) => {
   const [selectRadio, setSelectRadio] = useState(null);
 
-  const handleSelectRadio = (id) => {
+  const handleSelectRadio = (id, value) => {
     setSelectRadio(id);
-    onSelectRadio(id);
+    onSelectRadio(value);
   };
 
   return (
@@ -15,7 +15,7 @@ const RadioButton = ({ onSelectRadio }) => {
       {radioItems.map((item, index) => (
         <BounceInLeft key={index} delayVal={index * 0.5}>
           <div
-            onClick={() => handleSelectRadio(item.id)}
+            onClick={() => handleSelectRadio(item.id, item.label)}
             className={`flex group cursor-pointer hover:shadow-bottom-green hover:transition-all items-center gap-x-5 border duration-700 ease-in-out border-hijau rounded-2xl w-[300px] py-4
                                 ${selectRadio === item.id ? "" : ""}`}
           >
@@ -23,7 +23,7 @@ const RadioButton = ({ onSelectRadio }) => {
               type="radio"
               id={`radio-${item.id}`}
               checked={selectRadio === item.id}
-              onChange={() => handleSelectRadio(item.id)}
+              onChange={() => handleSelectRadio(item.id, item.label)}
               className="hidden"
             />
             <label
