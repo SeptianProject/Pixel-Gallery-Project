@@ -34,6 +34,15 @@ const DashboardPage = () => {
                 onclick={() => navigate('/profile/edit')}
               />
             </div>
+            <div className="w-full md:w-72">
+              <SingleButton
+                text="Edit Profile"
+                txtColor="red-600"
+                bgColor="white"
+                border='hijau'
+                onclick={() => navigate('/profile/edit')}
+              />
+            </div>
           </div>
           <div className="mt-16">
             <SingleCard
