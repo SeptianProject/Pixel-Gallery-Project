@@ -52,6 +52,7 @@ const RegisterPage = () => {
         {
           id: userId,
           name: formData.name,
+          email: formData.email,
           avatar_url: formData.avatar_url,
           entered_as: formData.entered_as,
           role: formData.role,

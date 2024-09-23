@@ -16,6 +16,7 @@ import image_register from "./img-register.svg";
 import detail_image from "./detail_img.svg";
 import firstGif from "./first.gif";
 import secondGif from "./second.gif";
+import { formatDateDefault } from "../lib/function/FormaterDate";
 
 // Image and logo assets
 export const assets = {
@@ -217,20 +218,20 @@ export const formFieldTasks = [
 ];
 
 // Form field edit profile items
-export const formEditProfileItems = [
-  { id: "name", title: "Name", placeholder: "Rehan Firmansyah" },
-  { id: "role", title: "Role", placeholder: "Ui/UEX Designer" },
-  { id: "instance", title: "Instances", placeholder: "SMKN 1 Banyuwangi" },
+export const formEditProfileItems = (user) => [
+  { id: "name", title: "Name", placeholder: `${user.name}` },
+  { id: "role", title: "Role", placeholder: `${user.role}` },
+  { id: "instance", title: "Instances", placeholder: `${user.instances}` },
   {
     id: "date",
     title: "Join Date",
-    placeholder: "08 March 2022",
+    placeholder: `${formatDateDefault(user.created_at)}`,
     blocked: true,
   },
   {
     id: "email",
     title: "Email",
-    placeholder: "nasyfaalshadahmad@gmail.com",
+    placeholder: `${user.email}`,
     blocked: true,
   },
   { id: "pass", title: "Password", placeholder: "*******************" },

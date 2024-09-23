@@ -7,6 +7,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     if (storedToken) {
       const parsedToken = JSON.parse(storedToken);
       setToken(parsedToken);
+      setUser(parsedToken?.user);
       // Simpan role dari token atau fetch role dari backend
       setRole(parsedToken?.user?.role);
     }
@@ -36,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
     const { data: profileData, error: profileError } = await supabase
       .from("profiles")
-      .select("role")
+      .select("*")
       .eq("id", userId)
       .single();
 
@@ -45,11 +47,14 @@ export const AuthProvider = ({ children }) => {
     }
 
     setToken(loginData);
-    sessionStorage.setItem("token", JSON.stringify(loginData));
-    setRole(profileData.role);
+    setUser(profileData);
+    sessionStorage.setItem(
+      "token",
+      JSON.stringify({ loginData, user: profileData })
+    );
 
     if (profileData.role) {
-      navigate("/home");
+      navigate("/welcome");
     } else {
       navigate("/choose-role");
     }
@@ -58,12 +63,13 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setToken(null);
     setRole(null);
+    setUser(null);
     sessionStorage.removeItem("token");
     navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ token, role, login, logout, loading }}>
+    <AuthContext.Provider value={{ token, user, role, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -27,7 +27,7 @@ import { useContext } from "react";
 import ProtectedRoute from "../lib/function/ProtectedRoute";
 
 const Page = () => {
-  const { token, loading } = useContext(AuthContext);
+  const { token, user, loading } = useContext(AuthContext);
   const location = useLocation();
 
   if (loading) {
@@ -77,7 +77,7 @@ const Page = () => {
             path="/welcome"
             element={
               <GifComponent
-                title="Hello Nasyfa, Welcome to Pixel"
+                title={`Hello ${user?.name}, Welcome to Pixel`}
                 subtitle="Hang in there, your account is getting set up!"
                 gif={assets.firstGif}
               />

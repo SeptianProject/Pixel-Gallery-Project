@@ -6,7 +6,7 @@ import { handleChange } from "../../lib/function/FormHandle";
 import { AuthContext } from "../../lib/auth/AuthContext";
 
 const LoginPage = () => {
-  const { login } = useContext(AuthContext);
+  const { login, user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
