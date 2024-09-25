@@ -1,11 +1,19 @@
 import { useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SquarePen } from "lucide-react";
+import Modal from "../modal/Modal";
 
-const StackImage = ({ userProfile }) => {
+const StackImage = () => {
+  const avatarUrl = useRef(
+    "https://avatarfiles.alphacoders.com/161/161002.jpg"
+  );
   const location = useLocation();
   const [editProfile, setEditProfile] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const updateAvatar = (imgSrc) => {
+    avatarUrl.current = imgSrc;
+  };
 
   const handleEditProfile = () => {
     if (location.pathname === "/profile/edit") {
@@ -29,10 +37,23 @@ const StackImage = ({ userProfile }) => {
         <div className="absolute -bottom-12">
           {editProfile ? (
             <div className="relative">
-              <img src={assets.photo_profile} className="size-36" />
-              <button className="absolute z-20 bottom-0 right-0 rounded-full border-2 border-hijau p-2 bg-white">
+              <img
+                src={avatarUrl.current}
+                // className="size-36"
+                className="w-[150px] h-[150px] rounded-full border-2 border-gray-400"
+              />
+              <button
+                className="absolute bottom-0 right-0 rounded-full border-2 border-hijau p-2 bg-white"
+                onClick={() => setModalOpen(true)}
+              >
                 <SquarePen className="text-hijau" size={20} strokeWidth={2.1} />
               </button>
+              {modalOpen && (
+                <Modal
+                  updateAvatar={updateAvatar}
+                  closeModal={() => setModalOpen(false)}
+                />
+              )}
             </div>
           ) : (
             <img src={assets.photo_profile} className="size-36" />

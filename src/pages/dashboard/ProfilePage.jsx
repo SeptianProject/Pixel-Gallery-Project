@@ -8,7 +8,6 @@ import { AuthContext } from "../../lib/auth/AuthContext";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
-  // const navigate = useNavigate()
 
   if (!user) {
     return <div>Loading....</div>;

@@ -1,4 +1,5 @@
 import { AuthProvider } from "./lib/auth/AuthContext";
+import "react-image-crop/dist/ReactCrop.css";
 import Page from "./pages/Page";
 
 const App = () => {
