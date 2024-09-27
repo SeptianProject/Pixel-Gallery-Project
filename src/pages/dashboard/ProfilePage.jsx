@@ -1,5 +1,5 @@
 // import { useNavigate } from "react-router-dom"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { formEditProfileItems } from "../../assets/assets";
 import SingleButton from "../../components/buttons/SingleButton";
 import FormFieldItems from "../../components/forms/FormFieldItems";
@@ -9,6 +9,7 @@ import { handleChange } from "../../lib/function/FormHandle";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
+  const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     avatar_url: user.avatar_url,
     name: user.name,
@@ -27,9 +28,10 @@ const ProfilePage = () => {
     return <div>Loading....</div>;
   }
   return (
-    <div className="flex flex-col items-center mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-7xl">
+    <div className={`flex flex-col items-center mx-auto px-14 lg:px-20 lg:mx-auto lg:max-w-7xl
+    ${modalOpen ? 'fixed' : 'static'}`}>
       <div className="mt-10">
-        <StackImage setSelectedAvatar={handleSelectAvatar} />
+        <StackImage setSelectedAvatar={handleSelectAvatar} modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </div>
       <div className="mt-20 w-full">
         <FormFieldItems

@@ -5,12 +5,11 @@ import { SquarePen } from "lucide-react";
 import Modal from "../modal/Modal";
 import { AuthContext } from "../../lib/context/AuthContext";
 
-const StackImage = ({ setSelectedAvatar }) => {
+const StackImage = ({ setSelectedAvatar, modalOpen, setModalOpen }) => {
   const { user } = useContext(AuthContext);
   const avatarUrl = useRef(user.avatar_url);
   const location = useLocation();
   const [editProfile, setEditProfile] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
   const updateAvatar = (imgSrc) => {
     avatarUrl.current = imgSrc;
   };

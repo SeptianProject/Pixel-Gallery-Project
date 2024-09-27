@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Menu, Search, X } from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { assets, navItems } from "../assets/assets";
@@ -76,7 +77,7 @@ const Navbar = () => {
           </div>
 
           {/* Nav Menu */}
-          <div className="relative justify-items-center z-50">
+          <div className="relative justify-items-center z-50 md:z-0">
             <div
               className={`${navOpen ? "block" : "hidden"} 
                 flex flex-col absolute items-center bg-white w-[160px] -left-10 mt-10 shadow-2xl rounded-xl 
@@ -87,15 +88,13 @@ const Navbar = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className={`${
-                    location.pathname === item.href
-                      ? "font-extrabold"
-                      : "font-medium "
-                  }
-                    ${
-                      item.bg
-                        ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden"
-                        : ""
+                  className={`${location.pathname === item.href
+                    ? "font-extrabold"
+                    : "font-medium "
+                    }
+                    ${item.bg
+                      ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden"
+                      : ""
                     }
                     text-hijau hover:font-extrabold hover:text-hijau transition-all duration-500 text-base py-2 lg:py-0`}
                 >
@@ -141,10 +140,9 @@ const Navbar = () => {
                     className={`
                       ${isFocus ? "transform -translate-x-5" : ""} 
                       ${searchMobClick ? "transform -translate-x-12 w-40" : ""} 
-                      ${
-                        searchMobClick & isFocus
-                          ? "transform -translate-x-4 w-40"
-                          : ""
+                      ${searchMobClick & isFocus
+                        ? "transform -translate-x-4 w-40"
+                        : ""
                       } 
                       transform transition-all duration-700 ease-out bg-transparent md:pr-5
                     text-dark placeholder:text-dark font-normal text-base outline-none border-none`}
@@ -172,7 +170,7 @@ const Navbar = () => {
             }}
             className={`${searchMobClick ? "hidden" : "block"} cursor-pointer`}
           >
-            <img src={user.avatar_url} className="w-14 h-14 select-none" />
+            <img src={assets.profile} className="size-14 select-none rounded-full hover:border-gray-400 border-2 border-transparent transition-all duration-500 hover:scale-110" />
           </div>
         </div>
       </div>
