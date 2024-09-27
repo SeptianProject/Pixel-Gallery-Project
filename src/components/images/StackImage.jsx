@@ -4,13 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { SquarePen } from "lucide-react";
 import Modal from "../modal/Modal";
 
-const StackImage = () => {
+const StackImage = ({ modalOpen, setModalOpen }) => {
   const avatarUrl = useRef(
     "https://avatarfiles.alphacoders.com/161/161002.jpg"
   );
   const location = useLocation();
   const [editProfile, setEditProfile] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
   const updateAvatar = (imgSrc) => {
     avatarUrl.current = imgSrc;
   };
@@ -26,7 +25,7 @@ const StackImage = () => {
   });
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <div className="flex flex-col items-center justify-center">
         <div className="">
           <img
@@ -56,7 +55,7 @@ const StackImage = () => {
               )}
             </div>
           ) : (
-            <img src={assets.photo_profile} className="size-36" />
+            <img src={assets.profile} className="size-36 rounded-full" />
           )}
         </div>
       </div>
