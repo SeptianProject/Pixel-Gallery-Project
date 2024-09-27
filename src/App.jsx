@@ -1,4 +1,4 @@
-import { AuthProvider } from "./lib/auth/AuthContext";
+import { AuthProvider } from "./lib/context/AuthContext";
 import "react-image-crop/dist/ReactCrop.css";
 import Page from "./pages/Page";
 

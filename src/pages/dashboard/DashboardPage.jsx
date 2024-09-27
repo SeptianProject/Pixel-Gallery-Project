@@ -6,7 +6,7 @@ import DashboardProjects from "../../components/DashboardProjects";
 import { useNavigate } from "react-router-dom";
 import { projectInfoUser } from "../../assets/assets";
 import { useContext } from "react";
-import { AuthContext } from "../../lib/auth/AuthContext";
+import { AuthContext } from "../../lib/context/AuthContext";
 import { formatDateDashboard } from "../../lib/function/FormaterDate";
 
 const DashboardPage = () => {
@@ -16,7 +16,7 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col mx-auto mb-20 px-14 lg:px-20 lg:mx-auto lg:max-w-7xl">
       <div className="mt-10">
-        <StackImage userProfile={user.avatar_url} />
+        <StackImage />
       </div>
       <div className="lg:flex lg:justify-between lg:items-center mt-24">
         <div className="">

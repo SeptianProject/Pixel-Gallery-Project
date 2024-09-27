@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-const FormFieldItems = ({ formFields }) => {
+const FormFieldItems = ({ formFields, changeHandler }) => {
   const [selectValue, setSelectValue] = useState({});
   const [isDropdownOpen, setIsDropdownOpen] = useState({});
 
@@ -80,6 +80,7 @@ const FormFieldItems = ({ formFields }) => {
               id={item.id}
               name={item.id}
               type="text"
+              onChange={changeHandler}
               placeholder={item.placeholder}
               className="border border-hijau rounded-2xl pl-7 pr-16 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm font-normal"
             />

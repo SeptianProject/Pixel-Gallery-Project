@@ -1,7 +1,7 @@
 import React from "react";
 import ImageCropper from "../images/ImageCropper";
 
-const Modal = ({ updateAvatar, closeModal }) => {
+const Modal = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
   return (
     <div
       className="relative z-10"
@@ -24,6 +24,7 @@ const Modal = ({ updateAvatar, closeModal }) => {
               </button>
               <ImageCropper
                 updateAvatar={updateAvatar}
+                setSelectedAvatar={setSelectedAvatar}
                 closeModal={closeModal}
               />
             </div>

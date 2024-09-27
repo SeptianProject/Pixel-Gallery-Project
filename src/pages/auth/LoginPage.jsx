@@ -3,7 +3,7 @@ import { formFieldLogin } from "../../assets/assets";
 import AuthComponent from "../../components/AuthComponent";
 import GreenRectangle from "../../components/GreenRectangle";
 import { handleChange } from "../../lib/function/FormHandle";
-import { AuthContext } from "../../lib/auth/AuthContext";
+import { AuthContext } from "../../lib/context/AuthContext";
 
 const LoginPage = () => {
   const { login } = useContext(AuthContext);

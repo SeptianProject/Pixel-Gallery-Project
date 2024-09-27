@@ -21,8 +21,8 @@ import ProfilePage from "./dashboard/ProfilePage";
 import DashboardAdminPage from "./dashboard/DashboardAdminPage";
 import LoginPage from "./auth/LoginPage";
 import GifComponent from "../components/GifComponent";
-import EmailConfirmed from "../lib/auth/EmailConfirmed";
-import { AuthContext } from "../lib/auth/AuthContext";
+import EmailConfirmed from "../lib/helper/EmailConfirmed";
+import { AuthContext } from "../lib/context/AuthContext";
 import { useContext } from "react";
 import ProtectedRoute from "../lib/function/ProtectedRoute";
 

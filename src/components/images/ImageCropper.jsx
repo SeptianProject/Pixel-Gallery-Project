@@ -9,7 +9,7 @@ import setCanvasPreview from "./SetCanvasPreview";
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 150;
 
-const ImageCropper = ({ updateAvatar, closeModal }) => {
+const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
   const imgRef = useRef();
   const previewCanvasRef = useRef();
   const [imgSrc, setImgSrc] = useState("");
@@ -97,6 +97,9 @@ const ImageCropper = ({ updateAvatar, closeModal }) => {
                   imgRef.current.height
                 )
               );
+              previewCanvasRef.current.toBlob((blob) => {
+                setSelectedAvatar(blob);
+              });
               const dataUrl = previewCanvasRef.current.toDataURL();
               updateAvatar(dataUrl);
               closeModal();
@@ -111,6 +114,7 @@ const ImageCropper = ({ updateAvatar, closeModal }) => {
           ref={previewCanvasRef}
           className="mt-4"
           style={{
+            display: "none",
             border: "1px solid black",
             objectFit: "contain",
             width: 150,
