@@ -1,5 +1,4 @@
 import pixel_logo from "./pixel-logo.svg";
-import profile from "./profile.jpg"; ``
 import photo_profile from "./photo-profile.svg";
 import photo_profile2 from "./photo-profile2.svg";
 import home_image from "./home-img.svg";
@@ -22,7 +21,6 @@ import { formatDateDefault } from "../lib/function/FormaterDate";
 // Image and logo assets
 export const assets = {
   pixel_logo,
-  profile,
   photo_profile,
   photo_profile2,
   home_image,
@@ -236,7 +234,7 @@ export const formEditProfileItems = (user) => [
     placeholder: `${user.email}`,
     blocked: true,
   },
-  { id: "pass", title: "Password", placeholder: "*******************", blocked: true },
+  { id: "pass", title: "Password", placeholder: "*******************" },
 ];
 
 export const projectInfoUser = [

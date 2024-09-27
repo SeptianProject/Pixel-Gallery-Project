@@ -76,7 +76,7 @@ const Navbar = () => {
           </div>
 
           {/* Nav Menu */}
-          <div className="relative justify-items-center z-50 md:z-0">
+          <div className="relative justify-items-center z-50">
             <div
               className={`${navOpen ? "block" : "hidden"} 
                 flex flex-col absolute items-center bg-white w-[160px] -left-10 mt-10 shadow-2xl rounded-xl 
@@ -172,7 +172,7 @@ const Navbar = () => {
             }}
             className={`${searchMobClick ? "hidden" : "block"} cursor-pointer`}
           >
-            <img src={assets.photo_profile} className="w-14 h-14 select-none" />
+            <img src={user.avatar_url} className="w-14 h-14 select-none" />
           </div>
         </div>
       </div>
