@@ -34,7 +34,7 @@ const FormFieldItems = ({ formData, formFields, changeHandler }) => {
                   className="border flex justify-between border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 cursor-pointer"
                   onClick={() => toggleDropdown(item.id)}
                 >
-                  {selectValue[item.id] || item.placeholder}
+                  {selectValue[item.id] || item.placeholder || item.value}
                 </div>
                 <div
                   onClick={() => toggleDropdown(item.id)}

@@ -221,31 +221,56 @@ export const formFieldTasks = [
 
 // Form field edit profile items
 export const formEditProfileItems = (user) => [
-  { id: "name", title: "Name", value: "name", required: true },
-  { id: "role", title: "Role", value: "role", required: true },
+  {
+    id: "name",
+    title: "Name",
+    value: "name",
+    required: true,
+    type: "text",
+  },
+  {
+    id: "role",
+    title: "Role",
+    value: "role",
+    placeholder: "Please Select",
+    required: true,
+    type: "select",
+    option: [
+      "UI/UX Designer",
+      "Front End Developer",
+      "Back End Developer",
+      "Mobile Developer",
+      "Full Stack Developer",
+      "Product Manager",
+    ],
+  },
   {
     id: "instance",
     title: "Instances",
     value: "instances",
     required: true,
+    type: "text",
   },
   {
     id: "date",
     title: "Join Date",
     value: `${formatDateDefault(user.created_at)}`,
     blocked: true,
+    type: "text",
   },
   {
     id: "email",
     title: "Email",
     value: `${user.email}`,
     blocked: true,
+    type: "email",
   },
   {
     id: "pass",
     title: "Password",
     value: "*******************",
     blocked: true,
+    type: "password",
   },
 ];
 

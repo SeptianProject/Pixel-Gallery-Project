@@ -41,7 +41,7 @@ const ProfilePage = () => {
           setModalOpen={setModalOpen}
         />
       </div>
-      <form action="">
+      <form action="" className="lg:flex lg:flex-col items-center">
         <div className="mt-20 w-full">
           <FormFieldItems
             formData={formData}
