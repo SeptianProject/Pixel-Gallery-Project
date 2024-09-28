@@ -88,13 +88,15 @@ const Navbar = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className={`${location.pathname === item.href
-                    ? "font-extrabold"
-                    : "font-medium "
-                    }
-                    ${item.bg
-                      ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden"
-                      : ""
+                  className={`${
+                    location.pathname === item.href
+                      ? "font-extrabold"
+                      : "font-medium "
+                  }
+                    ${
+                      item.bg
+                        ? "bg-hijau text-white w-full h-full text-center rounded-b-lg hover:bg-transparent lg:hidden"
+                        : ""
                     }
                     text-hijau hover:font-extrabold hover:text-hijau transition-all duration-500 text-base py-2 lg:py-0`}
                 >
@@ -140,9 +142,10 @@ const Navbar = () => {
                     className={`
                       ${isFocus ? "transform -translate-x-5" : ""} 
                       ${searchMobClick ? "transform -translate-x-12 w-40" : ""} 
-                      ${searchMobClick & isFocus
-                        ? "transform -translate-x-4 w-40"
-                        : ""
+                      ${
+                        searchMobClick & isFocus
+                          ? "transform -translate-x-4 w-40"
+                          : ""
                       } 
                       transform transition-all duration-700 ease-out bg-transparent md:pr-5
                     text-dark placeholder:text-dark font-normal text-base outline-none border-none`}
@@ -170,7 +173,10 @@ const Navbar = () => {
             }}
             className={`${searchMobClick ? "hidden" : "block"} cursor-pointer`}
           >
-            <img src={assets.profile} className="size-14 select-none rounded-full hover:border-gray-400 border-2 border-transparent transition-all duration-500 hover:scale-110" />
+            <img
+              src={user ? user.avatar_url : assets.profile}
+              className="size-14 select-none rounded-full hover:border-gray-400 border-2 border-transparent transition-all duration-500 hover:scale-110"
+            />
           </div>
         </div>
       </div>

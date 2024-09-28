@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-const FormFieldItems = ({ formFields, changeHandler }) => {
+const FormFieldItems = ({ formData, formFields, changeHandler }) => {
   const [selectValue, setSelectValue] = useState({});
   const [isDropdownOpen, setIsDropdownOpen] = useState({});
 
@@ -27,64 +27,78 @@ const FormFieldItems = ({ formFields, changeHandler }) => {
           >
             {item.title}
           </label>
-          {item.type === "select" ? (
-            <div className="relative">
-              <div
-                className="border flex justify-between border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 cursor-pointer"
-                onClick={() => toggleDropdown(item.id)}
-              >
-                {selectValue[item.id] || item.placeholder}
-              </div>
-              <div
-                onClick={() => toggleDropdown(item.id)}
-                className="absolute right-10 inset-y-4 cursor-pointer"
-              >
-                <ChevronDown
-                  size={30}
-                  strokeWidth={1.5}
-                  className="text-dark"
-                />
-              </div>
-              {isDropdownOpen[item.id] && (
-                <div className="absolute z-10 bg-white border border-hijau rounded-lg mt-2 w-full max-h-48 overflow-y-auto">
-                  {item.option.map((optionValue, optionIndex) => (
-                    <div
-                      className="px-4 py-2 hover:bg-hijau hover:text-white cursor-pointer"
-                      key={optionIndex}
-                      onClick={() => handleSelectValue(item.id, optionValue)}
-                    >
-                      {optionValue}
-                    </div>
-                  ))}
+          {
+            item.type === "select" ? (
+              <div className="relative">
+                <div
+                  className="border flex justify-between border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 cursor-pointer"
+                  onClick={() => toggleDropdown(item.id)}
+                >
+                  {selectValue[item.id] || item.placeholder}
                 </div>
-              )}
-            </div>
-          ) : item.type === "textArea" ? (
-            <textarea
-              id={item.id}
-              name={item.id}
-              placeholder={item.placeholder}
-              className="border border-hijau focus:border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm overflow-y-auto resize-y break-words"
-            />
-          ) : item.blocked === true ? (
-            <input
-              id={item.id}
-              name={item.id}
-              type="text"
-              disabled={true}
-              placeholder={item.placeholder}
-              className="border border-hijau rounded-2xl pl-7 pr-16  py-4 placeholder:text-dark bg-dark bg-opacity-30 placeholder:opacity-80 placeholder:text-sm font-medium"
-            />
-          ) : (
-            <input
-              id={item.id}
-              name={item.id}
-              type="text"
-              onChange={changeHandler}
-              placeholder={item.placeholder}
-              className="border border-hijau rounded-2xl pl-7 pr-16 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm font-normal"
-            />
-          )}
+                <div
+                  onClick={() => toggleDropdown(item.id)}
+                  className="absolute right-10 inset-y-4 cursor-pointer"
+                >
+                  <ChevronDown
+                    size={30}
+                    strokeWidth={1.5}
+                    className="text-dark"
+                  />
+                </div>
+                {isDropdownOpen[item.id] && (
+                  <div className="absolute z-10 bg-white border border-hijau rounded-lg mt-2 w-full max-h-48 overflow-y-auto">
+                    {item.option.map((optionValue, optionIndex) => (
+                      <div
+                        className="px-4 py-2 hover:bg-hijau hover:text-white cursor-pointer"
+                        key={optionIndex}
+                        onClick={() => handleSelectValue(item.id, optionValue)}
+                      >
+                        {optionValue}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : item.type === "textArea" ? (
+              <textarea
+                id={item.id}
+                name={item.id}
+                placeholder={item.placeholder}
+                className="border border-hijau focus:border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm overflow-y-auto resize-y break-words"
+              />
+            ) : item.blocked === true ? (
+              <input
+                id={item.id}
+                name={item.id}
+                value={item?.value}
+                type="text"
+                disabled={true}
+                placeholder={item.placeholder}
+                className="border border-hijau rounded-2xl pl-7 pr-16  py-4 placeholder:text-dark bg-dark bg-opacity-30 placeholder:opacity-80 placeholder:text-sm font-medium"
+              />
+            ) : (
+              <input
+                id={item.id}
+                name={item.id}
+                value={formData ? formData[item.value] || "" : ""}
+                required={item.required}
+                type="text"
+                onChange={changeHandler ? changeHandler : ""}
+                className="border border-hijau rounded-2xl pl-7 pr-16 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm font-normal"
+              />
+            )
+            // : (
+            //   <input
+            //     id={item.id}
+            //     name={item.id}
+            //     value={item?.value}
+            //     type="text"
+            //     onChange={changeHandler}
+            //     className="border border-hijau rounded-2xl pl-7 pr-16 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm font-normal"
+            //   />
+            // )
+          }
         </div>
       ))}
     </div>

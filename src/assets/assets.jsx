@@ -221,22 +221,32 @@ export const formFieldTasks = [
 
 // Form field edit profile items
 export const formEditProfileItems = (user) => [
-  { id: "name", title: "Name", placeholder: `${user.name}` },
-  { id: "role", title: "Role", placeholder: `${user.role}` },
-  { id: "instance", title: "Instances", placeholder: `${user.instances}` },
+  { id: "name", title: "Name", value: "name", required: true },
+  { id: "role", title: "Role", value: "role", required: true },
+  {
+    id: "instance",
+    title: "Instances",
+    value: "instances",
+    required: true,
+  },
   {
     id: "date",
     title: "Join Date",
-    placeholder: `${formatDateDefault(user.created_at)}`,
+    value: `${formatDateDefault(user.created_at)}`,
     blocked: true,
   },
   {
     id: "email",
     title: "Email",
-    placeholder: `${user.email}`,
+    value: `${user.email}`,
     blocked: true,
   },
-  { id: "pass", title: "Password", placeholder: "*******************", blocked: true },
+  {
+    id: "pass",
+    title: "Password",
+    value: "*******************",
+    blocked: true,
+  },
 ];
 
 export const projectInfoUser = [
