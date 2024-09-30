@@ -8,6 +8,8 @@ const FormFieldItems = ({ formData, formFields, changeHandler }) => {
   const handleSelectValue = (id, value) => {
     setSelectValue((prev) => ({ ...prev, [id]: value }));
     setIsDropdownOpen((prev) => ({ ...prev, [id]: false }));
+
+    changeHandler({ target: { name: id, value } });
   };
 
   const toggleDropdown = (id) => {
@@ -34,7 +36,9 @@ const FormFieldItems = ({ formData, formFields, changeHandler }) => {
                   className="border flex justify-between border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 cursor-pointer"
                   onClick={() => toggleDropdown(item.id)}
                 >
-                  {selectValue[item.id] || item.placeholder || item.value}
+                  {selectValue[item.id] || formData
+                    ? formData[item.value]
+                    : "" || item.placeholder}
                 </div>
                 <div
                   onClick={() => toggleDropdown(item.id)}
@@ -82,7 +86,7 @@ const FormFieldItems = ({ formData, formFields, changeHandler }) => {
                 id={item.id}
                 name={item.id}
                 value={formData ? formData[item.value] || "" : ""}
-                required={item.required}
+                required={item?.required || false}
                 type="text"
                 onChange={changeHandler ? changeHandler : ""}
                 className="border border-hijau rounded-2xl pl-7 pr-16 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm font-normal"

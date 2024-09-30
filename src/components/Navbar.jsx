@@ -174,7 +174,7 @@ const Navbar = () => {
             className={`${searchMobClick ? "hidden" : "block"} cursor-pointer`}
           >
             <img
-              src={user ? user.avatar_url : assets.profile}
+              src={user?.avatar_url || assets.profile}
               className="size-14 select-none rounded-full hover:border-gray-400 border-2 border-transparent transition-all duration-500 hover:scale-110"
             />
           </div>

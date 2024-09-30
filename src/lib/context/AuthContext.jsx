@@ -11,6 +11,21 @@ export const AuthProvider = ({ children }) => {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
+  const fetchUserProfile = async (userId) => {
+    const { data: profileData, error: profileError } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (profileError) {
+      console.error("Failed to retrieve profile:", profileError.message);
+    } else {
+      setUser(profileData);
+      setRole(profileData.role);
+    }
+  };
+
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");
     if (storedToken) {
@@ -19,6 +34,7 @@ export const AuthProvider = ({ children }) => {
       setUser(parsedToken?.user);
       // Simpan role dari token atau fetch role dari backend
       setRole(parsedToken?.user?.role);
+      fetchUserProfile(parsedToken?.user?.id);
     }
     setLoading(false);
   }, []);
@@ -69,7 +85,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, role, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{ token, user, role, login, logout, loading, fetchUserProfile }}
+    >
       {children}
     </AuthContext.Provider>
   );

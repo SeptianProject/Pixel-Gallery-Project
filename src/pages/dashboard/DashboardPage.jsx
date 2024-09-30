@@ -5,13 +5,19 @@ import SingleCard from "../../components/cards/SingleCard";
 import DashboardProjects from "../../components/DashboardProjects";
 import { useNavigate } from "react-router-dom";
 import { projectInfoUser } from "../../assets/assets";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../lib/context/AuthContext";
 import { formatDateDashboard } from "../../lib/function/FormaterDate";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, fetchUserProfile } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user?.id) {
+      fetchUserProfile(user.id);
+    }
+  }, [user?.id]);
 
   return (
     <div className="flex flex-col mx-auto mb-20 px-14 lg:px-20 lg:mx-auto lg:max-w-7xl">

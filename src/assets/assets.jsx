@@ -245,7 +245,7 @@ export const formEditProfileItems = (user) => [
     ],
   },
   {
-    id: "instance",
+    id: "instances",
     title: "Instances",
     value: "instances",
     required: true,
