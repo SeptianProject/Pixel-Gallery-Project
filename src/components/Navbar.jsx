@@ -155,15 +155,37 @@ const Navbar = () => {
             </form>
             {/* Shared Button */}
             <div className="hidden md:block select-none">
-              <button
-                onClick={() => navigate("/project/upload")}
-                type="button"
-                aria-label="Share Project"
-                className="border border-hijau text-dark rounded-2xl py-4 px-5
+              {!user ? (
+                <button
+                  onClick={() => navigate("/login")}
+                  type="button"
+                  aria-label="Share Project"
+                  className="border border-hijau text-dark rounded-2xl py-4 px-5
                             hover:bg-hijau transition-all duration-300 hover:text-white"
-              >
-                Share Project
-              </button>
+                >
+                  Share Project
+                </button>
+              ) : user?.entered_as === "Supervisor" ? (
+                <button
+                  onClick={() => navigate("/task/upload")}
+                  type="button"
+                  aria-label="Share Task"
+                  className="border border-hijau text-dark rounded-2xl py-4 px-5
+                            hover:bg-hijau transition-all duration-300 hover:text-white"
+                >
+                  Share Task
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate("/project/upload")}
+                  type="button"
+                  aria-label="Share Project"
+                  className="border border-hijau text-dark rounded-2xl py-4 px-5
+                            hover:bg-hijau transition-all duration-300 hover:text-white"
+                >
+                  Share Project
+                </button>
+              )}
             </div>
           </div>
           {/* Profile image */}

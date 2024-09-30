@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
 import HomePage from "./HomePage";
 import ProjectPage from "./projects/ProjectPage";
@@ -67,63 +67,82 @@ const Page = () => {
         )}
         <ScrollToTop />
         <Routes>
+          {/* Anonym user */}
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/search/:query" element={<ResultSearchPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/email-confirmed" element={<EmailConfirmed />} />
-          <Route path="/choose-role" element={<ChooseRole />} />
-          <Route
-            path="/welcome"
-            element={
-              <GifComponent
-                title={`Hello ${user?.name}, Welcome to Pixel`}
-                subtitle="Hang in there, your account is getting set up!"
-                gif={assets.firstGif}
-              />
-            }
-          />
-          <Route path="/home" element={<HomePage />} />
           <Route path="/project" element={<ProjectPage />} />
           <Route path="/task" element={<TaskPage />} />
-          <Route path="/task/detail" element={<DetailTask />} />
-          <Route path="/search/:query" element={<ResultSearchPage />} />
-          <Route path="/project/upload" element={<FormProjectPage />} />
-          <Route path="/project/update" element={<FormProjectPage />} />
-          <Route path="/project/share" element={<SharedProject />} />
-          <Route path="/project/detail" element={<DetailProject />} />
-          <Route
-            path="/upload-project"
-            element={
-              <GifComponent
-                title="Your project is being uploaded"
-                subtitle="It'll be ready shortly-just a moment more!"
-                gif={assets.secondGif}
-              />
-            }
-          />
-          <Route path="/task/upload" element={<FormTaskPage />} />
-          <Route
-            path="/upload-task"
-            element={
-              <GifComponent
-                title="Your Task is being uploaded"
-                subtitle="The upload process will be ready - just a moment!"
-                gif={assets.secondGif}
-              />
-            }
-          />
-          {token ? <Route path="/dashboard" element={<DashboardPage />} /> : ""}
 
-          <Route
-            path="/dashboard/admin"
-            element={
-              <ProtectedRoute token={token} allowedRoles={["SuperVisor"]}>
-                <DashboardAdminPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/profile/edit" element={<ProfilePage />} />
+          {/* Authenticated user */}
+          {token ? (
+            <>
+              <Route path="/choose-role" element={<ChooseRole />} />
+              <Route
+                path="/welcome"
+                element={
+                  <GifComponent
+                    title={`Hello ${user?.name}, Welcome to Pixel`}
+                    subtitle="Hang in there, your account is getting set up!"
+                    gif={assets.firstGif}
+                  />
+                }
+              />
+
+              <Route path="/profile/edit" element={<ProfilePage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/task/detail" element={<DetailTask />} />
+              <Route path="/project/upload" element={<FormProjectPage />} />
+              <Route path="/project/update" element={<FormProjectPage />} />
+              <Route path="/project/share" element={<SharedProject />} />
+              <Route path="/project/detail" element={<DetailProject />} />
+              <Route
+                path="/upload-project"
+                element={
+                  <GifComponent
+                    title="Your project is being uploaded"
+                    subtitle="It'll be ready shortly-just a moment more!"
+                    gif={assets.secondGif}
+                  />
+                }
+              />
+            </>
+          ) : (
+            ""
+          )}
+
+          {/* Supervisor  */}
+
+          {user?.entered_as == "Supervisor" ? (
+            <>
+              <Route
+                path="/dashboard/admin"
+                element={
+                  <ProtectedRoute token={token} allowedRoles={["SuperVisor"]}>
+                    <DashboardAdminPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/upload-task"
+                element={
+                  <GifComponent
+                    title="Your Task is being uploaded"
+                    subtitle="The upload process will be ready - just a moment!"
+                    gif={assets.secondGif}
+                  />
+                }
+              />
+
+              <Route path="/task/upload" element={<FormTaskPage />} />
+            </>
+          ) : (
+            ""
+          )}
         </Routes>
         {!hideFooter && (
           <div className="mx-auto px-14 md:pr-8 lg:px-20 lg:mx-auto lg:max-w-full">
