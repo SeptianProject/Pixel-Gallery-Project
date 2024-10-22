@@ -4,7 +4,7 @@ import SingleButton from "../../components/buttons/SingleButton";
 import SingleCard from "../../components/cards/SingleCard";
 import DashboardProjects from "../../components/DashboardProjects";
 import { useNavigate } from "react-router-dom";
-import { projectInfoUser } from "../../assets/assets";
+import { projectInfoAdmin, projectInfoUser } from "../../assets/assets";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../lib/context/AuthContext";
 import { formatDateDashboard } from "../../lib/function/FormaterDate";
@@ -55,7 +55,13 @@ const DashboardPage = () => {
             </div>
           </div>
           <div className="mt-16">
-            <SingleCard projectInfoList={projectInfoUser} />
+            <SingleCard
+              projectInfoList={
+                user?.entered_as === "Supervisor"
+                  ? projectInfoAdmin
+                  : projectInfoUser
+              }
+            />
           </div>
         </div>
         <div className="mt-20 lg:mt-0">

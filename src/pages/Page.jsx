@@ -95,6 +95,18 @@ const Page = () => {
 
               <Route path="/profile/edit" element={<ProfilePage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route
+                path="/dashboard/:uuid/:name"
+                element={<DashboardAdminPage />}
+              />
+              <Route
+                path="/dashboard/admin"
+                element={
+                  <ProtectedRoute token={token} allowedRoles={["Supervisor"]}>
+                    <DashboardAdminPage />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/task/detail" element={<DetailTask />} />
               <Route path="/project/upload" element={<FormProjectPage />} />
               <Route path="/project/update" element={<FormProjectPage />} />
@@ -119,14 +131,6 @@ const Page = () => {
 
           {user?.entered_as == "Supervisor" ? (
             <>
-              <Route
-                path="/dashboard/admin"
-                element={
-                  <ProtectedRoute token={token} allowedRoles={["SuperVisor"]}>
-                    <DashboardAdminPage />
-                  </ProtectedRoute>
-                }
-              />
               <Route
                 path="/upload-task"
                 element={
