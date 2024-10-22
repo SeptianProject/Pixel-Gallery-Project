@@ -25,7 +25,6 @@ const ProfilePage = () => {
   });
   const [avatar, setAvatar] = useState(null);
   const [error, setError] = useState();
-  console.log(userData, "avatar: ", avatar);
 
   const handleSelectAvatar = (selectedAvatar) => {
     setAvatar(selectedAvatar);

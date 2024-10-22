@@ -52,9 +52,10 @@ const StackImage = ({ setSelectedAvatar, modalOpen, setModalOpen }) => {
               </button>
               {modalOpen && (
                 <Modal
-                  setSelectedAvatar={setSelectedAvatar}
-                  updateAvatar={updateAvatar}
+                  setSelectedImage={setSelectedAvatar}
+                  updateImage={updateAvatar}
                   closeModal={() => setModalOpen(false)}
+                  cropPreset={"profile"}
                 />
               )}
             </div>

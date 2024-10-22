@@ -6,15 +6,47 @@ import ReactCrop, {
 } from "react-image-crop";
 import setCanvasPreview from "./SetCanvasPreview";
 
-const ASPECT_RATIO = 1;
-const MIN_DIMENSION = 150;
+const CROP_PRESETS = {
+  profile: {
+    aspect: 1,
+    minDimension: 150,
+    width: 150,
+    height: 150,
+    circular: true,
+    label: "Profile Photo",
+  },
+  cover: {
+    aspect: 16 / 9,
+    minDimension: 300,
+    width: 1200,
+    height: 675,
+    circular: false,
+    label: "Cover Image",
+  },
+  // Bisa menambahkan preset lain sesuai kebutuhan
+  square: {
+    aspect: 1,
+    minDimension: 200,
+    width: 200,
+    height: 200,
+    circular: false,
+    label: "Square Image",
+  },
+};
 
-const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
+const ImageCropper = ({
+  setSelectedImage,
+  updateImage,
+  closeModal,
+  cropPreset = "profile",
+}) => {
   const imgRef = useRef();
   const previewCanvasRef = useRef();
   const [imgSrc, setImgSrc] = useState("");
   const [crop, setCrop] = useState();
   const [error, setError] = useState("");
+
+  const currentPreset = CROP_PRESETS[cropPreset];
 
   const onSelectFile = (e) => {
     const file = e.target.files?.[0];
@@ -29,8 +61,13 @@ const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
       imageElement.addEventListener("load", (e) => {
         if (error) setError("");
         const { naturalWidth, naturalHeight } = e.currentTarget;
-        if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
-          setError("Image must be at least 150 x 150 pixels.    ");
+        if (
+          naturalWidth < currentPreset.minDimension ||
+          naturalHeight < currentPreset.minDimension
+        ) {
+          setError(
+            `Image must be at least ${currentPreset.minDimension}px in both dimension.    `
+          );
           return setImgSrc("");
         }
       });
@@ -41,13 +78,13 @@ const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
-    const cropWidthInPercent = (MIN_DIMENSION / width) * 100;
+    const cropWidthInPercent = (currentPreset.minDimension / width) * 100;
     const crop = makeAspectCrop(
       {
         unit: "%",
         width: cropWidthInPercent,
       },
-      ASPECT_RATIO,
+      currentPreset.aspect,
       width,
       height
     );
@@ -58,7 +95,7 @@ const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
   return (
     <>
       <label className="block mb-3 w-fit">
-        <span className="sr-only">Choose profile photo</span>
+        <span className="sr-only">Choose {currentPreset.label}</span>
         <input
           type="file"
           accept="image/*"
@@ -72,10 +109,10 @@ const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
           <ReactCrop
             crop={crop}
             onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
-            circularCrop
+            circularCrop={currentPreset.circular}
             keepSelection
-            aspect={ASPECT_RATIO}
-            minWidth={MIN_DIMENSION}
+            aspect={currentPreset.aspect}
+            minWidth={currentPreset.minDimension}
           >
             <img
               ref={imgRef}
@@ -98,10 +135,10 @@ const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
                 )
               );
               previewCanvasRef.current.toBlob((blob) => {
-                setSelectedAvatar(blob);
+                setSelectedImage(blob);
               });
               const dataUrl = previewCanvasRef.current.toDataURL();
-              updateAvatar(dataUrl);
+              updateImage(dataUrl);
               closeModal();
             }}
           >
@@ -117,8 +154,8 @@ const ImageCropper = ({ setSelectedAvatar, updateAvatar, closeModal }) => {
             display: "none",
             border: "1px solid black",
             objectFit: "contain",
-            width: 150,
-            height: 150,
+            width: currentPreset.width,
+            height: currentPreset.height,
           }}
         />
       )}
