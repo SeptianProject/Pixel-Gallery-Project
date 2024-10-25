@@ -1,30 +1,19 @@
-import SingleDescText from './SingleDescText'
-import SecondaryText from './SecondaryText'
+import SingleDescText from "./SingleDescText";
+import SecondaryText from "./SecondaryText";
 
-const DescriptionText = () => {
+const DescriptionText = ({ project }) => {
   return (
-    <div className='mt-10'>
+    <div className="mt-10">
       <div>
-        <SingleDescText text='Description' />
-        <p className='text-dark py-5 md:text-lg md:font-medium '>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae fringilla purus, a iaculis risus. Cras a
-          tortor id leo lacinia blandit. Praesent at dolor sit amet turpis luctus fringilla. Duis ac pharetra sapien. Nam
-          vehicula orci in nulla placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae fringilla
-          purus, a iaculis risus. Cras a tortor id leo lacinia blandit. Praesent at dolor sit amet turpis luctus fringilla.
-          Duis ac pharetra sapien. Nam vehicula orci in nulla placerat Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit. Aenean vitae fringilla purus, a iaculis risus. Cras a tortor id leo lacinia blandit. Praesent at dolor sit
-          amet turpis luctus fringilla. Duis ac pharetra sapien. Nam vehicula orci in nulla placerat. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Aenean vitae fringilla purus, a iaculis risus. Cras a tortor id leo lacinia
-          blandit. Praesent at dolor sit amet turpis luctus fringilla. Duis ac pharetra sapien. Nam vehicula orci in nulla
-          placerat
+        <SingleDescText text="Description" />
+        <p className="text-dark py-5 md:text-lg md:font-medium ">
+          {project.description}
         </p>
-        <SingleDescText text='Technology' />
-        <SecondaryText
-          text='React Tailwind CSS ' textMd='lg' fontMd='medium'
-        />
+        <SingleDescText text="Technology" />
+        <SecondaryText text={project.technology} textMd="lg" fontMd="medium" />
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default DescriptionText
+export default DescriptionText;

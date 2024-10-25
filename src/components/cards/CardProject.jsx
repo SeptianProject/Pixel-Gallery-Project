@@ -1,16 +1,17 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { BounceInTop } from "../animations/BounceAnimate";
 
 const CardProject = ({ project }) => {
   const navigate = useNavigate();
   const profile = project?.profiles;
-  const shortUUID = project?.id.split("-")[4];
 
   return (
     <BounceInTop>
       <div
-        onClick={() => navigate(`/project/detail/${project.slug}/${shortUUID}`)}
+        onClick={() =>
+          navigate(`/project/detail/${project.slug}?p=${project.id}`)
+        }
         className="flex flex-col pt-12 select-none cursor-pointer"
       >
         <div className="relative group rounded-2xl hover:shadow-bottom-dark hover:border-transparent hover:border-b transition-all duration-300">

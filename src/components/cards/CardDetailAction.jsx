@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { BounceInTop } from "../animations/BounceAnimate";
 import SmallButton from "../buttons/SmallButton";
