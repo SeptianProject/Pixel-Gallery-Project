@@ -10,6 +10,7 @@ import { AuthContext } from "../../lib/context/AuthContext";
 import { fetchCategories } from "../../lib/services/CategoryService";
 import { getFileExtensionFromBlob } from "../../lib/function/GetExtensionBlob";
 import { supabase } from "../../lib/helper/createClient";
+import slugify from "slugify";
 
 const FormProjectPage = () => {
   const { user } = useContext(AuthContext);
@@ -112,6 +113,10 @@ const FormProjectPage = () => {
     e.preventDefault();
     // periksa apakah avatar ada filenya apa tidak
     let imageUrl = projectData.image_cover_url;
+    const slug = slugify(projectData.title, {
+      lower: true,
+      strict: true,
+    });
 
     if (coverImage) {
       // if (userData.avatar_url != "") {
@@ -130,6 +135,7 @@ const FormProjectPage = () => {
       .from("projects") // nama tabel di Supabase
       .insert({
         title: projectData.title,
+        slug: slug,
         technology: projectData.technology,
         category: projectData.category_id,
         description: projectData.description,
