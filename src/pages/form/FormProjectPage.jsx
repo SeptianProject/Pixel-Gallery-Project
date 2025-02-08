@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SingleButton from "../../components/buttons/SingleButton";
 import FormFieldUpload from "../../components/forms/FormFieldUpload";
 import FormFIeldItems from "../../components/forms/FormFieldItems";
@@ -14,6 +14,7 @@ import slugify from "slugify";
 
 const FormProjectPage = () => {
   const { user } = useContext(AuthContext);
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [modalOpen, setModalOpen] = useState(false);
@@ -30,8 +31,6 @@ const FormProjectPage = () => {
   });
   const [coverImage, setCoverImage] = useState(null);
   const [error, setError] = useState(null);
-
-  console.log(projectData);
 
   useEffect(() => {
     const loadCategories = async () => {
@@ -152,6 +151,7 @@ const FormProjectPage = () => {
       navigate("/upload-project");
     }
   };
+
   if (!user) {
     return <div>Loading....</div>;
   }

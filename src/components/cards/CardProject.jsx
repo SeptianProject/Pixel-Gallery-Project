@@ -30,7 +30,7 @@ const CardProject = ({ project }) => {
         className="flex items-center mt-4 gap-4 cursor-pointer"
       >
         <img
-          src={profile.avatar_url ? profile.avatar_url : assets.photo_profile}
+          src={profile?.avatar_url ? profile.avatar_url : assets.photo_profile}
           className="h-8 w-auto hidden lg:block rounded-full"
         />
         <h4 className="text-dark font-semibold text-base">{profile.name}</h4>

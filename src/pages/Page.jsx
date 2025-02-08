@@ -109,9 +109,12 @@ const Page = () => {
               />
               <Route path="/task/detail" element={<DetailTask />} />
               <Route path="/project/upload" element={<FormProjectPage />} />
-              <Route path="/project/update" element={<FormProjectPage />} />
+              <Route
+                path="/project/update/:uuid"
+                element={<FormProjectPage />}
+              />
               <Route path="/project/share" element={<SharedProject />} />
-              <Route path="/project/detail/:slug" element={<DetailProject />} />
+              <Route path="/project/detail/:uuid" element={<DetailProject />} />
               <Route
                 path="/upload-project"
                 element={

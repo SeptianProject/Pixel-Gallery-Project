@@ -31,8 +31,7 @@ export const AuthProvider = ({ children }) => {
     if (storedToken) {
       const parsedToken = JSON.parse(storedToken);
       setToken(parsedToken);
-      setUser(parsedToken?.user);
-      // Simpan role dari token atau fetch role dari backend
+      setUser(parsedToken.user);
       setRole(parsedToken?.user?.role);
       fetchUserProfile(parsedToken?.user?.id);
     }

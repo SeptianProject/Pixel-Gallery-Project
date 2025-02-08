@@ -27,12 +27,14 @@ const CardDetailAction = ({ project }) => {
           </div>
           <div className="flex flex-col gap-y-1">
             <SmallButton
-              onClick={() => navigate("/project/update")}
+              onClick={() => navigate(`/project/update/${project.id}`)}
               text="Update"
             />
             <SmallButton text="Delete" />
             <SmallButton
-              onClick={() => navigate("/project/detail")}
+              onClick={() =>
+                navigate(`/project/detail/${project.slug}?p=${project.id}`)
+              }
               text="Detail"
             />
           </div>
