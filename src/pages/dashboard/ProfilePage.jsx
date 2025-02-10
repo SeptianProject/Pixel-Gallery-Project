@@ -1,5 +1,4 @@
-// import { useNavigate } from "react-router-dom"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { formEditProfileItems } from "../../assets/assets";
 import SingleButton from "../../components/buttons/SingleButton";
 import FormFieldItems from "../../components/forms/FormFieldItems";
@@ -10,21 +9,38 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/helper/createClient";
 import { getFileExtensionFromBlob } from "../../lib/function/GetExtensionBlob";
 import { CrudContext } from "../../lib/context/CrudContext";
+import { fetchProfile } from "../../lib/services/profileServices";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState({});
   const { user } = useContext(AuthContext);
   const { deleteOldAvatar } = useContext(CrudContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [userData, setUserData] = useState({
-    id: user.id,
-    avatar_url: user.avatar_url,
-    name: user.name,
-    role: user.role,
-    instances: user.instances,
+    id: "",
+    avatar_url: "",
+    name: "",
+    role: "",
+    instances: "",
   });
   const [avatar, setAvatar] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+
+  const fetchUser = async () => {
+    try {
+      setLoading(true);
+      const response = await fetchProfile(user.id);
+      setData(response);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log(data);
 
   const handleSelectAvatar = (selectedAvatar) => {
     setAvatar(selectedAvatar);
@@ -38,7 +54,6 @@ const ProfilePage = () => {
 
     try {
       const timestamp = Date.now();
-      // const fileExtension = avatar.name.split(".").pop();
       const fileExtension = getFileExtensionFromBlob(avatar);
       const newFileName = `avatar_${timestamp}.${fileExtension}`;
 
@@ -50,8 +65,6 @@ const ProfilePage = () => {
       if (uploadError) {
         throw uploadError;
       }
-
-      // Mendapatkan Url dari file
 
       const { data: urlData, error: urlError } = supabase.storage
         .from("avatars")
@@ -71,13 +84,10 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // periksa apakah avatar ada filenya apa tidak
     let imageUrl = userData.avatar_url;
 
     if (avatar) {
-      // if (userData.avatar_url != "") {
       await deleteOldAvatar(userData.avatar_url);
-      // }
 
       imageUrl = await uploadImage();
 
@@ -104,7 +114,12 @@ const ProfilePage = () => {
       navigate("/dashboard");
     }
   };
-  if (!user) {
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  if (loading) {
     return <div>Loading....</div>;
   }
   if (error) {
@@ -117,6 +132,7 @@ const ProfilePage = () => {
     >
       <div className="mt-10">
         <StackImage
+          image={data.avatar_url}
           setSelectedAvatar={handleSelectAvatar}
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
@@ -128,11 +144,11 @@ const ProfilePage = () => {
         className="lg:flex lg:flex-col items-center"
       >
         <div className="mt-20 w-full">
-          <FormFieldItems
+          {/* <FormFieldItems
             formData={userData}
-            formFields={formEditProfileItems(user)}
+            formFields={formEditProfileItems()}
             changeHandler={(e) => handleChange(e, setUserData)}
-          />
+          /> */}
         </div>
         <div className="my-20 md:w-80 w-full">
           <SingleButton

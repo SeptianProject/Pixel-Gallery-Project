@@ -5,9 +5,9 @@ import { SquarePen } from "lucide-react";
 import Modal from "../modal/Modal";
 import { AuthContext } from "../../lib/context/AuthContext";
 
-const StackImage = ({ setSelectedAvatar, modalOpen, setModalOpen }) => {
-  const { user, fetchUserProfile } = useContext(AuthContext);
-  const avatarUrl = useRef(user?.avatar_url || assets.profile);
+const StackImage = ({ image, setSelectedAvatar, modalOpen, setModalOpen }) => {
+  const { user } = useContext(AuthContext);
+  const avatarUrl = useRef(image || assets.profile);
   const location = useLocation();
   const [editProfile, setEditProfile] = useState(false);
   const updateAvatar = (imgSrc) => {
@@ -22,10 +22,7 @@ const StackImage = ({ setSelectedAvatar, modalOpen, setModalOpen }) => {
 
   useEffect(() => {
     handleEditProfile();
-    if (user?.id) {
-      fetchUserProfile(user.id);
-    }
-  }, [user?.id]);
+  }, []);
 
   return (
     <div className="relative">

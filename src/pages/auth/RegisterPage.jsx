@@ -6,8 +6,10 @@ import { useState } from "react";
 import { supabase } from "../../lib/helper/createClient";
 import { useNavigate } from "react-router-dom";
 import { handleChange } from "../../lib/function/FormHandle";
+import { useAuth } from "../../lib/context/AuthContext";
 
 const RegisterPage = () => {
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
     avatar_url: "",
     name: "",
@@ -18,55 +20,30 @@ const RegisterPage = () => {
     role: "",
   });
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-      options: {
-        data: {
-          displayName: formData.name,
-          role: formData.entered_as,
-        },
-      },
-    });
-
-    if (authError) {
-      if (authError.status === 429) {
-        setError("To many requests. Please try again later.");
-      } else {
-        setError(authError.message);
-      }
-      console.error(error);
-      return;
-    }
-
-    // Setelah user terdaftar, masukkan data ke tabel profiles
-    const userId = authData.user.id;
-    const { data: profileData, error: profileError } = await supabase
-      .from("profiles")
-      .insert([
-        {
-          id: userId,
-          name: formData.name,
-          email: formData.email,
-          avatar_url: formData.avatar_url,
-          entered_as: formData.entered_as,
-          role: formData.role,
-          instances: formData.instances,
-        },
-      ]);
-    if (profileError) {
-      setError(profileError.message);
-      console.error(error);
-    } else {
+    try {
+      setLoading(true);
+      const response = await register(
+        formData.email,
+        formData.password,
+        formData.name,
+        formData.role,
+        formData.entered_as,
+        formData.instances
+      );
+      console.log(response);
       alert("check your email for verification");
-      console.log(profileData);
       setError(null);
       navigate("/login");
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 

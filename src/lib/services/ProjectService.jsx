@@ -41,3 +41,18 @@ export const fetchProjectsByCategory = async (categoryID) => {
     console.error("Error fetching projects by category:", error);
   }
 };
+
+export const fetchProjectsByUser = async (userID) => {
+  try {
+    const { data, error } = await supabase
+      .from("projects")
+      .select(
+        "*, profiles:owner_id ( id, name, avatar_url, entered_as, instances, role )"
+      )
+      .eq("owner_id", userID);
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error fetching projects by category:", error);
+  }
+};

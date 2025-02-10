@@ -110,7 +110,6 @@ const FormProjectPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // periksa apakah avatar ada filenya apa tidak
     let imageUrl = projectData.image_cover_url;
     const slug = slugify(projectData.title, {
       lower: true,
@@ -118,10 +117,6 @@ const FormProjectPage = () => {
     });
 
     if (coverImage) {
-      // if (userData.avatar_url != "") {
-      // await deleteOldAvatar(projectData.image_cover_url);
-      // }
-
       imageUrl = await uploadImage();
 
       if (!imageUrl) {
@@ -130,19 +125,17 @@ const FormProjectPage = () => {
       }
     }
 
-    const { data, error } = await supabase
-      .from("projects") // nama tabel di Supabase
-      .insert({
-        title: projectData.title,
-        slug: slug,
-        technology: projectData.technology,
-        category: projectData.category_id,
-        description: projectData.description,
-        link_github: projectData.link_github,
-        link_website: projectData.link_website,
-        image_cover: imageUrl,
-        owner_id: projectData.owner_id,
-      });
+    const { data, error } = await supabase.from("projects").insert({
+      title: projectData.title,
+      slug: slug,
+      technology: projectData.technology,
+      category: projectData.category_id,
+      description: projectData.description,
+      link_github: projectData.link_github,
+      link_website: projectData.link_website,
+      image_cover: imageUrl,
+      owner_id: projectData.owner_id,
+    });
 
     if (error) {
       setError("Gagal menambahkan Project");

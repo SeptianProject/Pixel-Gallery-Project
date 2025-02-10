@@ -27,7 +27,7 @@ import { useContext } from "react";
 import ProtectedRoute from "../lib/function/ProtectedRoute";
 
 const Page = () => {
-  const { token, user, loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
   if (loading) {
@@ -79,14 +79,14 @@ const Page = () => {
           <Route path="/task" element={<TaskPage />} />
 
           {/* Authenticated user */}
-          {token ? (
+          {user ? (
             <>
               <Route path="/choose-role" element={<ChooseRole />} />
               <Route
                 path="/welcome"
                 element={
                   <GifComponent
-                    title={`Hello ${user?.name}, Welcome to Pixel`}
+                    title={`Hello ${user?.user_metadata.displayName}, Welcome to Pixel`}
                     subtitle="Hang in there, your account is getting set up!"
                     gif={assets.firstGif}
                   />
@@ -102,7 +102,7 @@ const Page = () => {
               <Route
                 path="/dashboard/admin"
                 element={
-                  <ProtectedRoute token={token} allowedRoles={["Supervisor"]}>
+                  <ProtectedRoute allowedRoles={["Supervisor"]}>
                     <DashboardAdminPage />
                   </ProtectedRoute>
                 }

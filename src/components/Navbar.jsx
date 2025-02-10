@@ -8,7 +8,7 @@ import { AuthContext } from "../lib/context/AuthContext";
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, token } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const closeRef = useRef();
   const [navOpen, setNavOpen] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -191,7 +191,7 @@ const Navbar = () => {
           {/* Profile image */}
           <div
             onClick={() => {
-              token ? navigate("/dashboard") : navigate("/login");
+              user ? navigate("/dashboard") : navigate("/login");
             }}
             className={`${searchMobClick ? "hidden" : "block"} cursor-pointer`}
           >

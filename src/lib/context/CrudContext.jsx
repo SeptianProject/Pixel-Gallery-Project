@@ -3,10 +3,6 @@ import { supabase } from "../helper/createClient";
 
 export const CrudContext = createContext();
 
-// export const useCrud = ({ children }) => {
-//   return useContext(SupabaseContext);
-// };
-
 export const CrudProvider = ({ children }) => {
   const deleteOldAvatar = async (oldAvatarUrl) => {
     if (!oldAvatarUrl) return;

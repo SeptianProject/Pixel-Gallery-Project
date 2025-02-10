@@ -4,22 +4,29 @@ import AuthComponent from "../../components/AuthComponent";
 import GreenRectangle from "../../components/GreenRectangle";
 import { handleChange } from "../../lib/function/FormHandle";
 import { AuthContext } from "../../lib/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { login } = useContext(AuthContext);
+  const { login, profile } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function handleLogIn(e) {
     e.preventDefault();
     try {
-      await login(formData.email, formData.password);
+      const response = await login(formData.email, formData.password);
+      if (response?.role) {
+        navigate("/welcome");
+      } else {
+        navigate("/choose-role");
+      }
     } catch (error) {
-      setErrorMessage(error.message);
-      alert(errorMessage);
+      setError(error.message);
+      alert(error);
     }
   }
 

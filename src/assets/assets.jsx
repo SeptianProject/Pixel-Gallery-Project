@@ -232,7 +232,7 @@ export const formFieldTasks = [
 ];
 
 // Form field edit profile items
-export const formEditProfileItems = (user) => [
+export const formEditProfileItems = () => [
   {
     id: "name",
     title: "Name",
@@ -266,14 +266,15 @@ export const formEditProfileItems = (user) => [
   {
     id: "date",
     title: "Join Date",
-    value: `${formatDateDefault(user.created_at)}`,
+    // value: `${formatDateDefault(user.created_at)}`,
+    value: `testes`,
     blocked: true,
     type: "text",
   },
   {
     id: "email",
     title: "Email",
-    value: `${user.email}`,
+    value: `testes`,
     blocked: true,
     type: "email",
   },

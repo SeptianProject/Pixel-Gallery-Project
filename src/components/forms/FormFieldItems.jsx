@@ -11,16 +11,14 @@ const FormFieldItems = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState({});
 
   const handleSelectValue = (id, option) => {
-    setSelectValue((prev) => ({ ...prev, [id]: option.label }));
-    setIsDropdownOpen((prev) => ({ ...prev, [id]: false }));
+    setSelectValue(option);
+    setIsDropdownOpen(false);
 
     if (id === "category") {
       onCategoryChange(option);
     } else {
       changeHandler({ target: { name: id, value: option.label || option } });
     }
-
-    // changeHandler({ target: { name: id, value } });
   };
 
   const toggleDropdown = (id) => {
@@ -42,14 +40,12 @@ const FormFieldItems = ({
           </label>
           {
             item.type === "select" ? (
-              <div className="relative">
+              <div key={item.id} className="relative">
                 <div
                   className="border flex justify-between border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 cursor-pointer"
                   onClick={() => toggleDropdown(item.id)}
                 >
-                  {selectValue[item.id] ||
-                    item.placeholder ||
-                    "Select an option"}
+                  {selectValue || "Select an option"}
                 </div>
                 <div
                   onClick={() => toggleDropdown(item.id)}
