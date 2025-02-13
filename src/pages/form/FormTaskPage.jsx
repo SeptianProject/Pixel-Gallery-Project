@@ -5,10 +5,11 @@ import FormFIeldItems from "../../components/forms/FormFieldItems";
 import GroupImage from "../../components/images/GroupImage";
 import { formFieldTasks } from "../../assets/assets";
 import { handleChange } from "../../lib/function/FormHandle";
+import { useState } from "react";
 
 const FormTaskPage = () => {
   const navigate = useNavigate();
-  //   const [formProject, setFormProject] = useState();
+  const [formTask, setFormTask] = useState({});
 
   return (
     <form>
@@ -22,7 +23,7 @@ const FormTaskPage = () => {
         <div className="mt-20">
           <FormFIeldItems
             formFields={formFieldTasks}
-            changeHandler={handleChange}
+            changeHandler={() => handleChange(e)}
           />
           <FormFieldUpload />
         </div>

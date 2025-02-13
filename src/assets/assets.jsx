@@ -104,7 +104,6 @@ export const formFieldProjects = [
     value: "category",
     placeholder: "Website",
     type: "select",
-    option: ["Website", "Design", "Application"],
   },
   {
     id: "description",
@@ -232,7 +231,7 @@ export const formFieldTasks = [
 ];
 
 // Form field edit profile items
-export const formEditProfileItems = () => [
+export const formEditProfileItems = (user) => [
   {
     id: "name",
     title: "Name",
@@ -247,14 +246,6 @@ export const formEditProfileItems = () => [
     placeholder: "Please Select",
     required: true,
     type: "select",
-    option: [
-      "UI/UX Designer",
-      "Front End Developer",
-      "Back End Developer",
-      "Mobile Developer",
-      "Full Stack Developer",
-      "Product Manager",
-    ],
   },
   {
     id: "instances",
@@ -266,15 +257,14 @@ export const formEditProfileItems = () => [
   {
     id: "date",
     title: "Join Date",
-    // value: `${formatDateDefault(user.created_at)}`,
-    value: `testes`,
+    value: `${formatDateDefault(user.created_at)}`,
     blocked: true,
     type: "text",
   },
   {
     id: "email",
     title: "Email",
-    value: `testes`,
+    value: `${user.user_metadata.email}`,
     blocked: true,
     type: "email",
   },

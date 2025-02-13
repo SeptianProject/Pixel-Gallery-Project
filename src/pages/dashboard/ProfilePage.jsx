@@ -8,14 +8,15 @@ import { handleChange } from "../../lib/function/FormHandle";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/helper/createClient";
 import { getFileExtensionFromBlob } from "../../lib/function/GetExtensionBlob";
-import { CrudContext } from "../../lib/context/CrudContext";
-import { fetchProfile } from "../../lib/services/profileServices";
+import {
+  deleteOldAvatar,
+  fetchProfile,
+} from "../../lib/services/profileServices";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const { user } = useContext(AuthContext);
-  const { deleteOldAvatar } = useContext(CrudContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [userData, setUserData] = useState({
     id: "",
@@ -32,15 +33,19 @@ const ProfilePage = () => {
     try {
       setLoading(true);
       const response = await fetchProfile(user.id);
-      setData(response);
+      setUserData({
+        id: response.id,
+        avatar_url: response.avatar_url,
+        name: response.name,
+        role: response.role,
+        instances: response.instances,
+      });
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
-
-  console.log(data);
 
   const handleSelectAvatar = (selectedAvatar) => {
     setAvatar(selectedAvatar);
@@ -132,7 +137,7 @@ const ProfilePage = () => {
     >
       <div className="mt-10">
         <StackImage
-          image={data.avatar_url}
+          image={userData.avatar_url}
           setSelectedAvatar={handleSelectAvatar}
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
@@ -144,11 +149,11 @@ const ProfilePage = () => {
         className="lg:flex lg:flex-col items-center"
       >
         <div className="mt-20 w-full">
-          {/* <FormFieldItems
+          <FormFieldItems
             formData={userData}
-            formFields={formEditProfileItems()}
+            formFields={formEditProfileItems(user)}
             changeHandler={(e) => handleChange(e, setUserData)}
-          /> */}
+          />
         </div>
         <div className="my-20 md:w-80 w-full">
           <SingleButton

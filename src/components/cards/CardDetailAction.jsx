@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { BounceInTop } from "../animations/BounceAnimate";
 import SmallButton from "../buttons/SmallButton";
+import { DeleteProject } from "../../lib/services/ProjectService";
 
-const CardDetailAction = ({ project }) => {
+const CardDetailAction = ({ handleDelete, project }) => {
   const navigate = useNavigate();
   const profile = project?.profiles;
 
@@ -30,7 +31,10 @@ const CardDetailAction = ({ project }) => {
               onClick={() => navigate(`/project/update/${project.id}`)}
               text="Update"
             />
-            <SmallButton text="Delete" />
+            <SmallButton
+              onClick={() => handleDelete(project.id)}
+              text="Delete"
+            />
             <SmallButton
               onClick={() =>
                 navigate(`/project/detail/${project.slug}?p=${project.id}`)

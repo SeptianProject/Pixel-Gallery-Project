@@ -6,28 +6,36 @@ import MainText from "../../components/text/MainText";
 import XButton from "../../components/buttons/XButton.jsx";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { supabase } from "../../lib/helper/createClient.js";
+import { fetchProject } from "../../lib/services/ProjectService.jsx";
+import { fetchProfile } from "../../lib/services/profileServices.jsx";
 
 const DetailProject = () => {
   const [searchParams] = useSearchParams();
   const uuid = searchParams.get("p");
-  const [loading, setLoading] = useState(true);
+  const userID = searchParams.get("u");
+  const [previewData, setPreviewData] = useState({
+    title: searchParams.get("title"),
+    technology: searchParams.get("technology"),
+    description: searchParams.get("description"),
+    link_github: searchParams.get("link_github"),
+    link_website: searchParams.get("link_website"),
+    image_cover: searchParams.get("imageUrl"),
+    profiles: {},
+  });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [project, setProject] = useState();
+  const [project, setProject] = useState({});
 
-  const fetchProject = async () => {
+  console.log(previewData);
+
+  const fetch = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("projects")
-        .select(
-          `*, profiles:owner_id ( id, name, avatar_url, entered_as, instances, role )`
-        )
-        .eq("id", uuid)
-        .single();
+      const { data, error } = await fetchProject(uuid);
 
       if (error) throw error;
 
+      console.log(data);
       setProject(data);
     } catch (error) {
       setError(error.message);
@@ -36,8 +44,31 @@ const DetailProject = () => {
     }
   };
 
+  const fetchProfiles = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await fetchProfile(userID);
+
+      if (error) throw error;
+
+      console.log(data);
+      setPreviewData((prev) => ({
+        ...prev,
+        profiles: data,
+      }));
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchProject();
+    if (uuid) {
+      fetch();
+    } else {
+      fetchProfiles();
+    }
   }, []);
 
   if (loading) return <p>Loading...</p>;
@@ -48,23 +79,29 @@ const DetailProject = () => {
       <div className="flex flex-col mx-auto px-8 md:px-16 lg:px-20 lg:mx-auto lg:max-w-full">
         <XButton />
         <div className="mt-16 mb-10 pr-5">
-          <MainText titleText={project.title} />
+          <MainText titleText={uuid ? project.title : previewData.title} />
         </div>
-        <GroupGithub project={project} />
+        <GroupGithub project={uuid ? project : previewData} />
         <div className="mt-20 mb-5 select-none">
           <div className="flex justify-center items-center">
             <img
               src={
-                project.image_cover ? project.image_cover : assets.card_image
+                uuid
+                  ? project.image_cover
+                    ? project.image_cover
+                    : assets.card_image
+                  : previewData.image_cover
+                  ? previewData.image_cover
+                  : assets.card_image
               }
               className="max-w-6xl w-full h-full"
             />
           </div>
         </div>
-        <DescriptionText project={project} />
+        <DescriptionText project={uuid ? project : previewData} />
       </div>
       <div className="w-full max-w-7xl">
-        <GroupDivide project={project} />
+        <GroupDivide project={uuid ? project : previewData} />
       </div>
     </div>
   );

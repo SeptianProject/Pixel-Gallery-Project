@@ -8,8 +8,10 @@ import { projectInfoAdmin, projectInfoUser } from "../../assets/assets";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../lib/context/AuthContext";
 import { formatDateDashboard } from "../../lib/function/FormaterDate";
-import { supabase } from "../../lib/helper/createClient";
-import { fetchProjectsByUser } from "../../lib/services/ProjectService";
+import {
+  DeleteProject,
+  fetchProjectsByUser,
+} from "../../lib/services/ProjectService";
 import { fetchProfile } from "../../lib/services/profileServices";
 
 const DashboardPage = () => {
@@ -23,8 +25,9 @@ const DashboardPage = () => {
   const fetchUser = async () => {
     try {
       setLoading(true);
-      const response = await fetchProfile(user.id);
-      setProfile(response);
+      const { data, error } = await fetchProfile(user.id);
+      if (error) throw error;
+      setProfile(data);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -41,6 +44,21 @@ const DashboardPage = () => {
       setError(error.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (project) => {
+    try {
+      setLoading(true);
+      const { error } = await DeleteProject(project);
+
+      fetchProjects();
+      if (error) throw error;
+    } catch (error) {
+      setError(error.message);
+      console.error(error);
+    } finally {
+      setLoading(true);
     }
   };
 
@@ -62,10 +80,10 @@ const DashboardPage = () => {
           <div className="flex flex-col items-start gap-5">
             <div>
               <ProfileText
-                name={profile?.name}
-                role={profile?.role}
-                instance={profile?.instances}
-                date={`Joined On ${formatDateDashboard(profile?.created_at)}`}
+                name={profile.name}
+                role={profile.role}
+                instance={profile.instances}
+                date={`Joined On ${formatDateDashboard(profile.created_at)}`}
                 gapCustom={"gap-y-3"}
               />
             </div>
@@ -98,7 +116,7 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="mt-20 lg:mt-0">
-          <DashboardProjects projects={projects} />
+          <DashboardProjects handleDelete={handleDelete} projects={projects} />
         </div>
       </div>
     </div>

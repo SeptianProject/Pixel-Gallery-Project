@@ -4,7 +4,7 @@ import CardTask from "./cards/CardTask";
 import { useState } from "react";
 import ArrowButton from "./buttons/ArrowButton";
 
-const DashboardProjects = ({ projects }) => {
+const DashboardProjects = ({ handleDelete, projects }) => {
   const [arrowClick, setArrowClick] = useState(0);
   const minClick = -1;
   const maxClick = 0;
@@ -60,7 +60,11 @@ const DashboardProjects = ({ projects }) => {
           ) : (
             <>
               {projects.map((project) => (
-                <CardDetailAction project={project} key={project.id} />
+                <CardDetailAction
+                  handleDelete={handleDelete}
+                  project={project}
+                  key={project.id}
+                />
               ))}
             </>
           )}

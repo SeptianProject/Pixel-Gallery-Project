@@ -2,8 +2,13 @@ import { CloudDownload } from "lucide-react";
 import Modal from "../modal/Modal";
 import { useRef } from "react";
 
-const FormFieldUpload = ({ setSelectedImage, modalopen, setModalOpen }) => {
-  const coverUrl = useRef(null);
+const FormFieldUpload = ({
+  image,
+  setSelectedImage,
+  modalopen,
+  setModalOpen,
+}) => {
+  const coverUrl = useRef(image);
   const updateCover = (imgSrc) => {
     coverUrl.current = imgSrc;
   };

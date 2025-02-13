@@ -99,14 +99,14 @@ const Page = () => {
                 path="/dashboard/:uuid/:name"
                 element={<DashboardAdminPage />}
               />
-              <Route
+              {/* <Route
                 path="/dashboard/admin"
                 element={
                   <ProtectedRoute allowedRoles={["Supervisor"]}>
                     <DashboardAdminPage />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
               <Route path="/task/detail" element={<DetailTask />} />
               <Route path="/project/upload" element={<FormProjectPage />} />
               <Route
@@ -115,6 +115,7 @@ const Page = () => {
               />
               <Route path="/project/share" element={<SharedProject />} />
               <Route path="/project/detail/:uuid" element={<DetailProject />} />
+              <Route path="/project/detail" element={<DetailProject />} />
               <Route
                 path="/upload-project"
                 element={
@@ -132,7 +133,7 @@ const Page = () => {
 
           {/* Supervisor  */}
 
-          {user?.entered_as == "Supervisor" ? (
+          {user?.user_metadata?.role == "Supervisor" ? (
             <>
               <Route
                 path="/upload-task"

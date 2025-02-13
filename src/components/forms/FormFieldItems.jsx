@@ -4,25 +4,25 @@ import { useState } from "react";
 const FormFieldItems = ({
   formData,
   formFields,
+  options,
   changeHandler,
   onCategoryChange,
 }) => {
-  const [selectValue, setSelectValue] = useState({});
+  const [selectValue, setSelectValue] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState({});
-
-  const handleSelectValue = (id, option) => {
-    setSelectValue(option);
-    setIsDropdownOpen(false);
-
-    if (id === "category") {
-      onCategoryChange(option);
-    } else {
-      changeHandler({ target: { name: id, value: option.label || option } });
-    }
-  };
 
   const toggleDropdown = (id) => {
     setIsDropdownOpen((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleSelectLabel = (index) => {
+    const option = options.find((option) => option.id === index);
+    return option ? option.name : "";
+  };
+
+  const handleSelectValue = (id, option) => {
+    onCategoryChange(option.id);
+    toggleDropdown(id);
   };
 
   return (
@@ -45,7 +45,9 @@ const FormFieldItems = ({
                   className="border flex justify-between border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 cursor-pointer"
                   onClick={() => toggleDropdown(item.id)}
                 >
-                  {selectValue || "Select an option"}
+                  {formData[item.id]
+                    ? handleSelectLabel(formData[item.id])
+                    : "Select an option"}
                 </div>
                 <div
                   onClick={() => toggleDropdown(item.id)}
@@ -59,13 +61,15 @@ const FormFieldItems = ({
                 </div>
                 {isDropdownOpen[item.id] && (
                   <div className="absolute z-10 bg-white border border-hijau rounded-lg mt-2 w-full max-h-48 overflow-y-auto">
-                    {item.option.map((option, optionIndex) => (
+                    {options.map((option, index) => (
                       <div
                         className="px-4 py-2 hover:bg-hijau hover:text-white cursor-pointer"
-                        key={optionIndex}
-                        onClick={() => handleSelectValue(item.id, option)}
+                        key={option.id}
+                        onClick={() =>
+                          handleSelectValue(item.id, option, index)
+                        }
                       >
-                        {option.label || option}
+                        {option.name}
                       </div>
                     ))}
                   </div>
@@ -75,7 +79,7 @@ const FormFieldItems = ({
               <textarea
                 id={item.id}
                 name={item.id}
-                value={formData ? formData[item.value] || "" : ""}
+                value={formData ? formData[item.id] || "" : ""}
                 onChange={changeHandler ? changeHandler : ""}
                 placeholder={item.placeholder}
                 className="border border-hijau focus:border-hijau rounded-2xl pl-7 pr-16 lg:pr-72 py-4 placeholder:text-dark placeholder:opacity-70 placeholder:text-sm overflow-y-auto resize-y break-words"

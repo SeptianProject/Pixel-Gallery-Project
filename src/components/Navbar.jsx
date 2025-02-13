@@ -165,7 +165,7 @@ const Navbar = () => {
                 >
                   Share Project
                 </button>
-              ) : user?.entered_as === "Supervisor" ? (
+              ) : user?.user_metadata.role === "Supervisor" ? (
                 <button
                   onClick={() => navigate("/task/upload")}
                   type="button"

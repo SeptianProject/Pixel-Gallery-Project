@@ -1,28 +1,34 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SingleButton from "../../components/buttons/SingleButton";
 import FormFieldUpload from "../../components/forms/FormFieldUpload";
-import FormFIeldItems from "../../components/forms/FormFieldItems";
+import FormFieldItems from "../../components/forms/FormFieldItems";
 import GroupImage from "../../components/images/GroupImage";
 import { formFieldProjects } from "../../assets/assets";
 import { handleChange } from "../../lib/function/FormHandle";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../lib/context/AuthContext";
-import { fetchCategories } from "../../lib/services/CategoryService";
-import { getFileExtensionFromBlob } from "../../lib/function/GetExtensionBlob";
-import { supabase } from "../../lib/helper/createClient";
+import { fetchAllCategories } from "../../lib/services/CategoryService";
 import slugify from "slugify";
+import {
+  createProject,
+  fetchProject,
+  updateProject,
+} from "../../lib/services/ProjectService";
+import {
+  deleteOldCover,
+  uploadProjectCover,
+} from "../../lib/services/ImageServices";
 
 const FormProjectPage = () => {
   const { user } = useContext(AuthContext);
   const { uuid } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const [modalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [projectData, setProjectData] = useState({
     title: "",
     technology: "",
-    category_id: 1,
+    category: null,
     description: "",
     link_github: "",
     link_website: "",
@@ -30,122 +36,144 @@ const FormProjectPage = () => {
     owner_id: user.id,
   });
   const [coverImage, setCoverImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await fetchAllCategories();
+      if (error) throw error;
+      setCategories(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchSelectedProject = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await fetchProject(uuid);
+      if (error) throw error;
+      setProjectData({
+        title: data.title,
+        technology: data.technology,
+        category: data.category,
+        description: data.description,
+        link_github: data.link_github,
+        link_website: data.link_website,
+        image_cover_url: data.image_cover,
+      });
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const loadCategories = async () => {
-      const categoriesData = await fetchCategories();
-      setCategories(categoriesData);
-    };
-    loadCategories();
+    fetchCategories();
+    if (uuid) {
+      fetchSelectedProject();
+    }
   }, []);
 
-  // custom handler untuk category
-  const modifiedFormFields = formFieldProjects.map((field) => {
-    if (field.id == "category") {
-      return {
-        ...field,
-        option: categories.map((cat) => ({
-          label: cat.name,
-          value: cat.id,
-        })),
-      };
-    }
-    return field;
-  });
-
-  // custom handler untuk category
   const handleCategoryChange = (selectedoption) => {
     setProjectData((prev) => ({
       ...prev,
-      category_id: selectedoption.value,
+      category: selectedoption,
     }));
   };
 
-  // handler untuk mengambil cover
   const handleSelectImage = (selectedImage) => {
     setCoverImage(selectedImage);
   };
 
-  const isUpload = location.pathname.includes("upload");
-
-  const uploadImage = async () => {
-    if (!coverImage) {
-      setError("there is no file, please insert file to upload");
-      return;
-    }
-
-    try {
-      const timestamp = Date.now();
-      // const fileExtension = avatar.name.split(".").pop();
-      const fileExtension = getFileExtensionFromBlob(coverImage);
-      const newFileName = `projectCover_${timestamp}.${fileExtension}`;
-
-      // Upload file ke supabase
-      const { data, error: uploadError } = await supabase.storage
-        .from("covers")
-        .upload(`projects/${newFileName}`, coverImage);
-
-      if (uploadError) {
-        throw uploadError;
-      }
-
-      // Mendapatkan Url dari file
-
-      const { data: urlData, error: urlError } = supabase.storage
-        .from("covers")
-        .getPublicUrl(`projects/${newFileName}`);
-
-      if (urlError) {
-        throw urlError;
-      }
-
-      return urlData.publicUrl;
-    } catch (error) {
-      console.error("error mengupload error:", error.message);
-      setError("Error uploading file: " + error.message);
-      return null;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let imageUrl = projectData.image_cover_url;
-    const slug = slugify(projectData.title, {
-      lower: true,
-      strict: true,
-    });
+    const isUpdate = uuid ? true : false;
+    try {
+      setLoading(true);
+      const slug = slugify(projectData.title, {
+        lower: true,
+        strict: true,
+      });
 
-    if (coverImage) {
-      imageUrl = await uploadImage();
+      let imageUrl = projectData.image_cover_url;
+      if (coverImage) {
+        try {
+          if (isUpdate) {
+            const { error } = await deleteOldCover(imageUrl, "projects");
 
-      if (!imageUrl) {
-        setError("Failed to upload image");
-        return;
+            if (error) throw error;
+          }
+          const { data, error } = await uploadProjectCover(coverImage);
+          if (error) throw error;
+          imageUrl = data.url;
+        } catch (error) {
+          setError("Gagal mengupload gambar", error.message);
+          return null;
+        }
       }
-    }
 
-    const { data, error } = await supabase.from("projects").insert({
-      title: projectData.title,
-      slug: slug,
-      technology: projectData.technology,
-      category: projectData.category_id,
-      description: projectData.description,
-      link_github: projectData.link_github,
-      link_website: projectData.link_website,
-      image_cover: imageUrl,
-      owner_id: projectData.owner_id,
-    });
+      if (isUpdate) {
+        const { error } = await updateProject(
+          projectData.title,
+          slug,
+          projectData.technology,
+          projectData.category,
+          projectData.description,
+          projectData.link_github,
+          projectData.link_website,
+          imageUrl,
+          projectData.owner_id,
+          uuid
+        );
+        if (error) throw error;
+      } else {
+        const { error } = await createProject(
+          projectData.title,
+          slug,
+          projectData.technology,
+          projectData.category,
+          projectData.description,
+          projectData.link_github,
+          projectData.link_website,
+          imageUrl,
+          projectData.owner_id
+        );
 
-    if (error) {
-      setError("Gagal menambahkan Project");
-      console.error(error);
-    } else {
+        if (error) throw error;
+      }
+
       navigate("/upload-project");
+    } catch (error) {
+      setError("Gagal menambahkan project");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!user) {
+  const handlePreview = () => {
+    if (projectData.image_cover_url) {
+      navigate(
+        `/project/detail?title=${projectData.title}&technology=${projectData.technology}&description=${projectData.description}&link_github=${projectData.link_github}&link_website=${projectData.link_website}&imageUrl=${projectData.image_cover_url}&u=${user.id}`
+      );
+    } else {
+      let imageUrl;
+      if (coverImage instanceof Blob) {
+        imageUrl = URL.createObjectURL(coverImage);
+      }
+      navigate(
+        `/project/detail?title=${projectData.title}&technology=${projectData.technology}&description=${projectData.description}&link_github=${projectData.link_github}&link_website=${projectData.link_website}&imageUrl=${imageUrl}&u=${user.id}`
+      );
+    }
+  };
+
+  if (loading) {
     return <div>Loading....</div>;
   }
   if (error) {
@@ -156,7 +184,7 @@ const FormProjectPage = () => {
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col mx-auto px-14 lg:px-20 lg:max-w-7xl">
         <div className="mt-10">
-          {isUpload ? (
+          {!uuid ? (
             <GroupImage
               title="Upload your Project"
               subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur hahahah adipiscing."
@@ -169,13 +197,15 @@ const FormProjectPage = () => {
           )}
         </div>
         <div className="mt-20">
-          <FormFIeldItems
+          <FormFieldItems
             formData={projectData}
-            formFields={modifiedFormFields}
+            formFields={formFieldProjects}
+            options={categories}
             changeHandler={(e) => handleChange(e, setProjectData)}
             onCategoryChange={handleCategoryChange}
           />
           <FormFieldUpload
+            image={projectData.image_cover_url}
             setSelectedImage={handleSelectImage}
             modalopen={modalOpen}
             setModalOpen={setModalOpen}
@@ -189,10 +219,10 @@ const FormProjectPage = () => {
             border="hijau"
             hovText="white"
             hovBg="hijau"
-            onclick={() => navigate("/project/detail")}
+            onclick={() => handlePreview()}
           />
           <SingleButton
-            text="Upload"
+            text={uuid ? "Update" : "Upload"}
             txtColor="white"
             bgColor="hijau"
             type={"submit"}

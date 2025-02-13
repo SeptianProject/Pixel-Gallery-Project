@@ -1,12 +1,10 @@
 import { useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SquarePen } from "lucide-react";
 import Modal from "../modal/Modal";
-import { AuthContext } from "../../lib/context/AuthContext";
 
 const StackImage = ({ image, setSelectedAvatar, modalOpen, setModalOpen }) => {
-  const { user } = useContext(AuthContext);
   const avatarUrl = useRef(image || assets.profile);
   const location = useLocation();
   const [editProfile, setEditProfile] = useState(false);
@@ -38,7 +36,6 @@ const StackImage = ({ image, setSelectedAvatar, modalOpen, setModalOpen }) => {
             <div className="relative">
               <img
                 src={avatarUrl.current}
-                // className="size-36"
                 className="w-[150px] h-[150px] rounded-full border-2 border-gray-400"
               />
               <button
@@ -58,8 +55,7 @@ const StackImage = ({ image, setSelectedAvatar, modalOpen, setModalOpen }) => {
             </div>
           ) : (
             <img
-              src={user?.avatar_url || assets.profile}
-              //  className="size-36"
+              src={image || assets.profile}
               className="w-[150px] h-[150px] rounded-full border-2 border-gray-400"
             />
           )}

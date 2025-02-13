@@ -32,7 +32,7 @@ const SortButton = ({ selectedCategory, setSelectedCategory }) => {
     >
       <div className="flex justify-around items-center border border-hijau rounded-xl md:rounded-2xl py-[10px] mt-5 md:m-0 md:py-4">
         <button className="font-medium text-hijau text-lg" type="button">
-          {selectedCategory.name}
+          {selectedCategory?.name || "Sort"}
         </button>
         {isOpen ? (
           <ChevronDown className="text-hijau w-6 h-6" strokeWidth={2.25} />

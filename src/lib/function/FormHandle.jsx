@@ -6,3 +6,10 @@ export const handleChange = function handleChange(e, setFormData) {
     };
   });
 };
+
+export const handleSelectChange = (selectedOption, setFormData, field) => {
+  setFormData((prev) => ({
+    ...prev,
+    field: selectedOption,
+  }));
+};

@@ -14,11 +14,11 @@ const GroupDivide = ({ project }) => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0"); // Get day and pad with zero if needed
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Get month (0-indexed)
-    const year = date.getFullYear(); // Get full year
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
 
-    return `${day}/${month}/${year}`; // Format as DD/MM/YYYY
+    return `${day}/${month}/${year}`;
   };
 
   const totalPages = Math.ceil(userProjects.length / itemPerPage);
@@ -61,7 +61,7 @@ const GroupDivide = ({ project }) => {
 
   useEffect(() => {
     fetchUserProjects();
-  }, [profile.id]);
+  }, [profile?.id]);
 
   if (error) return <p>Error: {error}</p>;
 
@@ -83,7 +83,7 @@ const GroupDivide = ({ project }) => {
         </div>
         <div className="flex items-center justify-center md:justify-between gap-x-5 mt-6 md:max-w-2xl lg:max-w-[70rem] mx-auto">
           <h1 className="text-dark font-semibold text-2xl">
-            More From {profile.name}
+            More From {profile?.name}
           </h1>
           <div>
             <ArrowButton

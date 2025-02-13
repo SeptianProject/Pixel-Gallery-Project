@@ -9,37 +9,62 @@ import {
   BounceInTop,
 } from "../../components/animations/BounceAnimate";
 import { useEffect, useState } from "react";
-import { supabase } from "../../lib/helper/createClient";
+import { fetchAllCategories } from "../../lib/services/CategoryService";
+import {
+  fetchAllProjects,
+  fetchProjectsByCategory,
+} from "../../lib/services/ProjectService";
 
 const ProjectPage = () => {
   const [projects, setProjects] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("projects")
-        .select(
-          `*, profiles:owner_id ( id, name, avatar_url, entered_as, instances, role )`
+      if (selectedCategory?.id) {
+        const { data, error } = await fetchProjectsByCategory(
+          selectedCategory.id
         );
-
-      if (error) throw error;
-
-      setProjects(data);
+        if (error) throw error;
+        setProjects(data);
+      } else {
+        const { data, error } = await fetchAllProjects();
+        if (error) throw error;
+        setProjects(data);
+      }
     } catch (error) {
-      setError(error.message);
+      setError(error);
     } finally {
       setLoading(false);
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await fetchAllCategories();
+
+      if (error) throw error;
+
+      if (data) {
+        setCategories(data);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   useEffect(() => {
-    fetchProjects();
+    fetchCategories();
   }, []);
 
-  console.log(projects);
+  useEffect(() => {
+    fetchProjects();
+  }, [selectedCategory]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -68,7 +93,12 @@ const ProjectPage = () => {
       </div>
       <BounceInBottom delayVal={1.5}>
         <div className="max-w-7xl my-16">
-          <RoundButton arrButton={projectButtons} maxMob="max-w-[150px]" />
+          <RoundButton
+            setSelected={setSelectedCategory}
+            selected={selectedCategory}
+            arrButton={categories}
+            maxMob="max-w-[150px]"
+          />
         </div>
       </BounceInBottom>
       <ListCardProjects projects={projects} />

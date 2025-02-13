@@ -7,31 +7,30 @@ import {
 import ListCardProjects from "../../components/list-cards/ListCardProjects";
 import SortButton from "../../components/buttons/SortButton";
 import {
-  fetchProjects,
+  fetchAllProjects,
   fetchProjectsByCategory,
 } from "../../lib/services/ProjectService";
 
 const HomeProjects = () => {
   const [projects, setProjects] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState({
-    id: 0,
-    name: "Sort",
-  });
+  const [selectedCategory, setSelectedCategory] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetch = async () => {
     try {
       setLoading(true);
-      let data;
-      if (selectedCategory.id > 0) {
-        data = await fetchProjectsByCategory(selectedCategory.id);
+      if (selectedCategory?.id) {
+        const { data, error } = await fetchProjectsByCategory(
+          selectedCategory.id
+        );
+        if (error) throw error;
+        setProjects(data);
       } else {
-        data = await fetchProjects();
+        const { data, error } = await fetchAllProjects();
+        if (error) throw error;
+        setProjects(data);
       }
-
-      setProjects(data);
-      console.log(data);
     } catch (error) {
       setError(error);
     } finally {

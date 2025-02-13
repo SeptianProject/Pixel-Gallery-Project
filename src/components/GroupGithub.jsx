@@ -36,17 +36,17 @@ const GroupGithub = ({ project }) => {
           <div>
             <img
               src={
-                profile.avatar_url ? profile.avatar_url : assets.photo_profile
+                profile?.avatar_url ? profile?.avatar_url : assets.photo_profile
               }
               className="h-10 w-10 md:h-14 md:w-14 rounded-full"
             />
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="text-dark text-base font-bold md:text-lg">
-              {profile.name}
+              {profile?.name}
             </h3>
             <p className="text-secondary text-xs font-semibold">
-              {profile.role}
+              {profile?.role}
             </p>
           </div>
         </div>

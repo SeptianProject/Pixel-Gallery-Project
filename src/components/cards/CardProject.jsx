@@ -33,7 +33,7 @@ const CardProject = ({ project }) => {
           src={profile?.avatar_url ? profile.avatar_url : assets.photo_profile}
           className="h-8 w-auto hidden lg:block rounded-full"
         />
-        <h4 className="text-dark font-semibold text-base">{profile.name}</h4>
+        <h4 className="text-dark font-semibold text-base">{profile?.name}</h4>
       </div>
     </BounceInTop>
   );
